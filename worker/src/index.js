@@ -11,7 +11,7 @@
 
 const CORS = {
   'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Methods': 'POST, OPTIONS',
+  'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
   'Access-Control-Allow-Headers': 'Content-Type, Authorization',
 };
 
@@ -25,6 +25,12 @@ export default {
 
     if (request.method === 'POST' && url.pathname === '/subscribe') {
       return handleSubscribe(request, env);
+    }
+    if (request.method === 'POST' && url.pathname === '/unsubscribe') {
+      return handleUnsubscribe(request, env);
+    }
+    if (request.method === 'GET' && url.pathname === '/subscribers/count') {
+      return handleCount(env);
     }
     if (request.method === 'POST' && url.pathname === '/notify') {
       return handleNotify(request, env);
@@ -52,6 +58,25 @@ async function handleSubscribe(request, env) {
   const key = crypto.randomUUID();
   await env.SUBSCRIPTIONS.put(key, JSON.stringify(sub));
   return json({ ok: true, id: key }, 201);
+}
+
+// ---------------------------------------------------------------------------
+// POST /unsubscribe
+// ---------------------------------------------------------------------------
+async function handleUnsubscribe(request, env) {
+  let body;
+  try { body = await request.json(); } catch { return json({ error: 'Invalid JSON' }, 400); }
+  if (!body?.id) return json({ error: 'Missing id' }, 400);
+  await env.SUBSCRIPTIONS.delete(body.id);
+  return json({ ok: true });
+}
+
+// ---------------------------------------------------------------------------
+// GET /subscribers/count
+// ---------------------------------------------------------------------------
+async function handleCount(env) {
+  const keys = await listAllKeys(env.SUBSCRIPTIONS);
+  return json({ count: keys.length });
 }
 
 // ---------------------------------------------------------------------------
@@ -145,7 +170,7 @@ async function buildVapidJwt(audience, env) {
   const claims = b64url(JSON.stringify({ aud: audience, exp: now + 43200, sub: env.VAPID_SUBJECT }));
   const unsigned = `${header}.${claims}`;
 
-  const privateKey = await importVapidPrivateKey(env.VAPID_PRIVATE_KEY);
+  const privateKey = await importVapidPrivateKey(env.VAPID_PRIVATE_KEY, env.VAPID_PUBLIC_KEY);
   const sig = await crypto.subtle.sign(
     { name: 'ECDSA', hash: 'SHA-256' },
     privateKey,
@@ -155,16 +180,18 @@ async function buildVapidJwt(audience, env) {
   return { token };
 }
 
-async function importVapidPrivateKey(keyB64) {
-  // Accetta chiave privata VAPID in formato base64url (raw, 32 byte)
-  const raw = base64urlDecode(keyB64);
-  return crypto.subtle.importKey(
-    'raw',
-    raw,
-    { name: 'ECDSA', namedCurve: 'P-256' },
-    false,
-    ['sign']
-  );
+async function importVapidPrivateKey(privateKeyB64, publicKeyB64) {
+  // Web Crypto non supporta 'raw' per ECDSA — serve JWK con x, y dalla chiave pubblica
+  const pubBytes = base64urlDecode(publicKeyB64);
+  // P-256 uncompressed: 0x04 | x (32 byte) | y (32 byte)
+  const jwk = {
+    kty: 'EC',
+    crv: 'P-256',
+    d: privateKeyB64,
+    x: b64urlBytes(pubBytes.slice(1, 33)),
+    y: b64urlBytes(pubBytes.slice(33, 65)),
+  };
+  return crypto.subtle.importKey('jwk', jwk, { name: 'ECDSA', namedCurve: 'P-256' }, false, ['sign']);
 }
 
 // ---------------------------------------------------------------------------
@@ -203,10 +230,10 @@ async function encryptPayload(plaintext, p256dhB64, authB64) {
 
   const salt = crypto.getRandomValues(new Uint8Array(16));
 
-  // HKDF per PRK_key e PRK_info (RFC 8291 §3.4)
+  // RFC 8291 §3.4: IKM = HKDF(salt=auth_secret, IKM=ecdh_secret, info="WebPush: info\0"||ua_pub||as_pub)
   const prk = await hkdf(
     new Uint8Array(sharedBits),
-    concat(authSecret, new TextEncoder().encode('WebPush: info\0'), receiverPublicKey, serverPublicKeyRaw),
+    concat(new TextEncoder().encode('WebPush: info\0'), receiverPublicKey, serverPublicKeyRaw),
     authSecret,
     32
   );

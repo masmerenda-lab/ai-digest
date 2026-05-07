@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Archivio – Digest Quotidiano AI</title>
+  <link rel="stylesheet" href="./style.css">
+  <style>
+    .header { background: #141e37; color: #fff; padding: 1.5rem; text-align: center; }
+    .header h1 { font-size: 1.4rem; margin-bottom: 0.2rem; }
+    .header a { color: #b4c8f0; font-size: 0.85rem; text-decoration: none; }
+    .header a:hover { text-decoration: underline; }
+    .content { padding: 1rem; max-width: 680px; margin: 0 auto; }
+    .digest-item { background: #fff; border-radius: 8px; margin-bottom: 0.75rem; box-shadow: 0 1px 4px rgba(0,0,0,.07); }
+    .digest-item a { display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.2rem; text-decoration: none; color: #191e37; gap: 1rem; }
+    .digest-item a:hover { background: #f4f6fb; border-radius: 8px; }
+    .digest-title { font-size: 0.92rem; font-weight: 600; }
+    .digest-date { font-size: 0.78rem; color: #8282a0; white-space: nowrap; }
+    .pagination { display: flex; justify-content: center; align-items: center; gap: 1rem; padding: 1.5rem 0; font-size: 0.88rem; }
+    .pagination button { background: #141e37; color: #fff; border: none; padding: 0.5rem 1.2rem; border-radius: 5px; cursor: pointer; font-size: 0.85rem; }
+    .pagination button:disabled { background: #c8cfe0; cursor: default; }
+    .pagination .page-info { color: #60607a; }
+    #empty { text-align: center; color: #8282a0; padding: 2rem; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>Archivio Digest AI</h1>
+    <a href="./index.html">← Torna alla home</a>
+  </div>
+
+  <div class="content">
+    <div id="list"></div>
+    <div id="empty" style="display:none">Nessun digest ancora disponibile.</div>
+    <div class="pagination">
+      <button id="btn-prev" disabled>← Precedente</button>
+      <span class="page-info" id="page-info"></span>
+      <button id="btn-next" disabled>Successivo →</button>
+    </div>
+  </div>
+
+  <script>
+    const PER_PAGE = 10;
+    let allDigests = [];
+    let page = 0;
+
+    function render() {
+      const list = document.getElementById('list');
+      const start = page * PER_PAGE;
+      const slice = allDigests.slice(start, start + PER_PAGE);
+
+      list.innerHTML = slice.map(d =>
+        `<div class="digest-item">
+          <a href="./digests/${d.date}.html">
+            <span class="digest-title">${d.title}</span>
+            <span class="digest-date">${d.date}</span>
+          </a>
+        </div>`
+      ).join('');
+
+      const totalPages = Math.ceil(allDigests.length / PER_PAGE);
+      document.getElementById('page-info').textContent =
+        allDigests.length ? `Pagina ${page + 1} di ${totalPages}` : '';
+      document.getElementById('btn-prev').disabled = page === 0;
+      document.getElementById('btn-next').disabled = page >= totalPages - 1;
+    }
+
+    fetch('./digests.json')
+      .then(r => r.json())
+      .then(list => {
+        allDigests = list;
+        if (!list.length) {
+          document.getElementById('empty').style.display = 'block';
+          document.querySelector('.pagination').style.display = 'none';
+        }
+        render();
+      })
+      .catch(() => {
+        document.getElementById('empty').style.display = 'block';
+        document.querySelector('.pagination').style.display = 'none';
+      });
+
+    document.getElementById('btn-prev').addEventListener('click', () => { page--; render(); window.scrollTo(0,0); });
+    document.getElementById('btn-next').addEventListener('click', () => { page++; render(); window.scrollTo(0,0); });
+  </script>
+</body>
+</html>

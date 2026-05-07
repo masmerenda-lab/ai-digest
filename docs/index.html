@@ -21,6 +21,9 @@
     #btn-iscrivi { background: #141e37; color: #fff; border: none; padding: 0.75rem 2rem; border-radius: 6px; font-size: 0.95rem; cursor: pointer; transition: background .2s; }
     #btn-iscrivi:hover:not(:disabled) { background: #286eb9; }
     #btn-iscrivi:disabled { background: #8ca5d2; cursor: default; }
+    #btn-disiscriviti { background: none; border: 1px solid #c0392b; color: #c0392b; padding: 0.35rem 1rem; border-radius: 5px; font-size: 0.8rem; cursor: pointer; }
+    #btn-disiscriviti:hover:not(:disabled) { background: #fdf0ef; }
+    .contatore { font-size: 0.78rem; color: #8282a0; margin-top: 0.6rem; }
     .stato { font-size: 0.82rem; margin-top: 0.75rem; min-height: 1.2em; }
     .stato.ok { color: #22824f; }
     .stato.errore { color: #c0392b; }
@@ -36,6 +39,8 @@
     #digest-list a:hover { text-decoration: underline; }
     .digest-date { color: #8282a0; font-size: 0.78rem; white-space: nowrap; }
     #digest-list:empty::after { content: 'Nessun digest ancora disponibile.'; color: #8282a0; font-size: 0.85rem; }
+    .archivio-link { display: block; text-align: right; font-size: 0.82rem; color: #286eb9; margin-top: 0.75rem; text-decoration: none; }
+    .archivio-link:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
@@ -49,6 +54,10 @@
     <p>Iscriviti per ricevere una notifica push ogni mattina quando il nuovo digest è pronto. Gratis, niente email.</p>
     <button id="btn-iscrivi">Iscriviti alle notifiche</button>
     <div id="stato" class="stato"></div>
+    <div id="disiscriviti-box" style="display:none; margin-top:0.6rem;">
+      <button id="btn-disiscriviti">Disiscriviti</button>
+    </div>
+    <div id="contatore" class="contatore"></div>
   </div>
 
   <div class="ios-hint" id="ios-hint" style="display:none">
@@ -65,6 +74,7 @@
   <div class="digests-section">
     <h2>Ultimi digest</h2>
     <ul id="digest-list"></ul>
+    <a href="./archive.html" class="archivio-link">Vedi archivio completo →</a>
   </div>
 
   <script>
