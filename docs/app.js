@@ -24,7 +24,7 @@ async function iscrivi() {
   stato.textContent = '';
 
   try {
-    const reg = await navigator.serviceWorker.register('/sw.js');
+    const reg = await navigator.serviceWorker.register('./sw.js');
     await navigator.serviceWorker.ready;
 
     const perm = await Notification.requestPermission();
@@ -72,13 +72,13 @@ document.addEventListener('DOMContentLoaded', () => {
   btn.addEventListener('click', iscrivi);
 
   // Carica lista digest
-  fetch('/digests.json')
+  fetch('./digests.json')
     .then(r => r.json())
     .then(list => {
       const ul = document.getElementById('digest-list');
       if (!ul || !list.length) return;
       ul.innerHTML = list.slice(0, 5).map(d =>
-        `<li><a href="/digests/${d.date}.html">${d.title} <span class="digest-date">${d.date}</span></a></li>`
+        `<li><a href="./digests/${d.date}.html">${d.title} <span class="digest-date">${d.date}</span></a></li>`
       ).join('');
     })
     .catch(() => {});

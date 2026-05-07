@@ -3,9 +3,9 @@ self.addEventListener('push', event => {
   event.waitUntil(
     self.registration.showNotification(data.title || 'Digest AI', {
       body: data.body || 'Nuovo digest disponibile!',
-      icon: '/icon-192.png',
-      badge: '/icon-192.png',
-      data: { url: data.url || '/' },
+      icon: 'https://masmerenda-lab.github.io/ai-digest/icon-192.png',
+      badge: 'https://masmerenda-lab.github.io/ai-digest/icon-192.png',
+      data: { url: data.url || 'https://masmerenda-lab.github.io/ai-digest/' },
     })
   );
 });
