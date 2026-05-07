@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Digest AI – {{ date }}</title>
+  <title>{% if is_weekly %}{{ date_long }}{% else %}Digest AI – {{ date }}{% endif %}</title>
   <link rel="stylesheet" href="../style.css">
   <style>
-    .digest-header { background: #141e37; color: #fff; padding: 2rem 1.5rem 1.5rem; text-align: center; }
+    .digest-header { background: {% if is_weekly %}#2d1b6b{% else %}#141e37{% endif %}; color: #fff; padding: 2rem 1.5rem 1.5rem; text-align: center; }
     .digest-header h1 { margin: 0 0 0.3rem; font-size: 1.6rem; }
     .digest-header .date { color: #b4c8f0; font-size: 0.95rem; }
     .digest-header .sub { color: #8ca5d2; font-size: 0.82rem; margin-top: 0.25rem; }
@@ -15,6 +15,7 @@
     .section-title.green  { color: #22824f; background: #f0faf4; border-left: 3px solid #22824f; }
     .section-title.blue   { color: #286eb9; background: #f0f6ff; border-left: 3px solid #286eb9; }
     .section-title.orange { color: #af551e; background: #fdf5ef; border-left: 3px solid #af551e; }
+    .section-title.purple { color: #6b2d9e; background: #f7f0ff; border-left: 3px solid #6b2d9e; }
     .item { padding: 0.75rem 0; border-bottom: 1px solid #e8eaf0; }
     .item:last-child { border-bottom: none; }
     .item-title { font-weight: 700; font-size: 0.92rem; color: #191e37; margin-bottom: 0.35rem; }
@@ -25,13 +26,15 @@
     .stars { color: #c88200; font-weight: 600; }
     .back-link { display: block; text-align: center; padding: 1.5rem; font-size: 0.85rem; color: #326ebe; }
     .pdf-link { display: inline-block; margin-top: 0.75rem; padding: 0.4rem 0.9rem; background: #141e37; color: #fff; border-radius: 4px; font-size: 0.8rem; text-decoration: none; }
+    .weekly-badge { display: inline-block; background: #f5c542; color: #333; font-size: 0.75rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 10px; margin-bottom: 0.4rem; }
   </style>
 </head>
 <body>
   <div class="digest-header">
-    <h1>Digest Quotidiano AI</h1>
+    {% if is_weekly %}<div class="weekly-badge">⭐ BEST OF WEEK</div>{% endif %}
+    <h1>{% if is_weekly %}Best of Week AI{% else %}Digest Quotidiano AI{% endif %}</h1>
     <div class="date">{{ date_long }}</div>
-    <div class="sub">Le ultime novità nel mondo dell'intelligenza artificiale</div>
+    <div class="sub">{% if is_weekly %}Il meglio dell'AI di questa settimana{% else %}Le ultime novità nel mondo dell'intelligenza artificiale{% endif %}</div>
     {% if pdf_url %}
     <a class="pdf-link" href="{{ pdf_url }}">⬇ Scarica PDF</a>
     {% endif %}
@@ -59,6 +62,7 @@
   {{ render_section("Nuovi Strumenti e Servizi AI", data.nuovi_strumenti, "green", "🛠") }}
   {{ render_section("Repository GitHub in Tendenza", data.repo_trending, "blue", "📦") }}
   {{ render_section("Aggiornamenti Framework e Librerie", data.aggiornamenti_framework, "orange", "🔄") }}
+  {{ render_section("Paper arXiv Rilevanti", data.paper_rilevanti, "purple", "📄") }}
 
   <a class="back-link" href="../index.html">← Tutti i digest</a>
 </body>

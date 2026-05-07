@@ -16,7 +16,8 @@ import subprocess
 import time
 import logging
 import requests
-from datetime import datetime
+import xml.etree.ElementTree as ET
+from datetime import datetime, timedelta
 from pathlib import Path
 from bs4 import BeautifulSoup
 from jinja2 import Environment, FileSystemLoader
@@ -275,6 +276,58 @@ def fetch_reddit() -> list[dict]:
 
 
 # ---------------------------------------------------------------------------
+# Modulo 3b: Fetch arXiv (paper AI recenti)
+# ---------------------------------------------------------------------------
+
+def fetch_arxiv() -> list[dict]:
+    """
+    Recupera paper AI degli ultimi 2 giorni da arXiv (cs.AI, cs.LG, cs.CL, cs.CV).
+    Usa l'API Atom pubblica, nessuna chiave richiesta.
+    """
+    url = (
+        "http://export.arxiv.org/api/query"
+        "?search_query=cat:cs.AI+OR+cat:cs.LG+OR+cat:cs.CL+OR+cat:cs.CV"
+        "&start=0&max_results=50&sortBy=submittedDate&sortOrder=descending"
+    )
+    try:
+        resp = requests.get(url, headers=HEADERS, timeout=20)
+        resp.raise_for_status()
+
+        ns = {"atom": "http://www.w3.org/2005/Atom"}
+        root = ET.fromstring(resp.text)
+        cutoff = datetime.utcnow() - timedelta(hours=48)
+
+        papers = []
+        for entry in root.findall("atom:entry", ns):
+            title_el = entry.find("atom:title", ns)
+            summary_el = entry.find("atom:summary", ns)
+            id_el = entry.find("atom:id", ns)
+            published_el = entry.find("atom:published", ns)
+            if not (title_el is not None and id_el is not None and published_el is not None):
+                continue
+            try:
+                pub_date = datetime.strptime(published_el.text.strip()[:10], "%Y-%m-%d")
+            except ValueError:
+                continue
+            if pub_date < cutoff:
+                continue
+            abstract = (summary_el.text or "").strip().replace("\n", " ")[:250]
+            papers.append({
+                "titolo": title_el.text.strip().replace("\n", " "),
+                "abstract": abstract,
+                "url": id_el.text.strip(),
+                "fonte": "arXiv",
+            })
+
+        logger.info(f"arXiv: trovati {len(papers)} paper recenti")
+        return papers[:20]
+
+    except Exception as e:
+        logger.warning(f"Errore arXiv: {e}")
+        return []
+
+
+# ---------------------------------------------------------------------------
 # Modulo 4: Summarizzazione con Google Gemini
 # ---------------------------------------------------------------------------
 
@@ -282,34 +335,34 @@ def summarize_with_gemini(
     github_data: list[dict],
     hn_data: list[dict],
     reddit_data: list[dict],
+    arxiv_data: list[dict] | None = None,
 ) -> dict:
     """
     Invia tutti i dati grezzi a Google Gemini per analisi, categorizzazione
-    e riassunto in italiano. Gemini restituisce un JSON strutturato con
-    le 3 sezioni del digest.
+    e riassunto in italiano. Restituisce un JSON strutturato con 4 sezioni.
 
     Returns:
-        Dict con chiavi: nuovi_strumenti, repo_trending, aggiornamenti_framework
+        Dict con chiavi: nuovi_strumenti, repo_trending, aggiornamenti_framework, paper_rilevanti
     """
     genai.configure(api_key=GEMINI_API_KEY)
     model = genai.GenerativeModel("gemini-2.5-flash")
     logger.info("Modello Gemini in uso: gemini-2.5-flash")
 
-    # Combina tutti i dati in un unico oggetto per il prompt
     raw_data = {
         "github_trending": github_data,
         "hacker_news": hn_data,
         "reddit": reddit_data,
+        "arxiv_papers": arxiv_data or [],
     }
 
-    prompt = f"""Sei un esperto analista di intelligenza artificiale. Analizza i dati raccolti oggi da GitHub Trending, Hacker News e Reddit e crea un digest strutturato in italiano.
+    prompt = f"""Sei un esperto analista di intelligenza artificiale. Analizza i dati raccolti oggi da GitHub Trending, Hacker News, Reddit e arXiv e crea un digest strutturato in italiano.
 
 DATI RACCOLTI (JSON grezzo):
 {json.dumps(raw_data, ensure_ascii=False, indent=2)}
 
 Il tuo compito:
 1. Analizza tutti gli elementi
-2. Classificali in 3 categorie (vedi sotto)
+2. Classificali in 4 categorie (vedi sotto)
 3. Scegli i 5-8 piu' significativi per ogni categoria
 4. Scrivi un riassunto di 2-3 frasi in italiano per ognuno
 
@@ -317,6 +370,7 @@ CATEGORIE:
 - "nuovi_strumenti": Nuovi tool AI, prodotti, servizi, assistenti, API, piattaforme lanciate di recente o con aggiornamenti importanti
 - "repo_trending": Repository GitHub con forte crescita di stelle, progetti open-source emergenti, demo virali
 - "aggiornamenti_framework": Aggiornamenti a librerie/framework esistenti (PyTorch, TensorFlow, JAX, HuggingFace, LangChain, ecc.)
+- "paper_rilevanti": Paper arXiv significativi su AI/ML/CV/NLP degli ultimi 2 giorni
 
 FORMATO OUTPUT (JSON puro, nessun testo aggiuntivo, nessun markdown):
 {{
@@ -325,14 +379,14 @@ FORMATO OUTPUT (JSON puro, nessun testo aggiuntivo, nessun markdown):
       "titolo": "Nome strumento o servizio",
       "riassunto": "2-3 frasi in italiano. Cosa fa, perche' e' rilevante, per chi e' utile.",
       "url": "URL diretto allo strumento/articolo",
-      "fonte": "Fonte originale (es. Hacker News, Reddit r/MachineLearning)"
+      "fonte": "Fonte originale"
     }}
   ],
   "repo_trending": [
     {{
       "titolo": "owner/nome-repository",
       "riassunto": "2-3 frasi in italiano. Cosa fa il repo, perche' sta guadagnando popolarita'.",
-      "stelle_oggi": "stelle guadagnate oggi (es. +1.234 stelle oggi) o stringa vuota se non disponibile",
+      "stelle_oggi": "stelle guadagnate oggi o stringa vuota",
       "url": "URL GitHub del repository",
       "fonte": "GitHub Trending"
     }}
@@ -340,9 +394,17 @@ FORMATO OUTPUT (JSON puro, nessun testo aggiuntivo, nessun markdown):
   "aggiornamenti_framework": [
     {{
       "titolo": "Nome framework - versione o tipo aggiornamento",
-      "riassunto": "2-3 frasi in italiano sulle novita' principali dell'aggiornamento.",
+      "riassunto": "2-3 frasi in italiano sulle novita' principali.",
       "url": "URL alla release notes o all'annuncio",
       "fonte": "Fonte"
+    }}
+  ],
+  "paper_rilevanti": [
+    {{
+      "titolo": "Titolo paper",
+      "riassunto": "2-3 frasi in italiano: contributo principale, dataset/metodo usato, risultato chiave.",
+      "url": "URL arXiv (es. https://arxiv.org/abs/XXXX.XXXXX)",
+      "fonte": "arXiv"
     }}
   ]
 }}
@@ -350,9 +412,8 @@ FORMATO OUTPUT (JSON puro, nessun testo aggiuntivo, nessun markdown):
 REGOLE IMPORTANTI:
 - Rispondi SOLO con il JSON valido, zero testo prima o dopo
 - I riassunti devono essere SEMPRE in italiano
-- Se un elemento non ha un URL valido, usa il permalink Reddit o il link HN
-- Preferisci qualita' alla quantita': meglio 5 elementi ottimi che 8 mediocri
-- Se una categoria ha pochi dati, e' accettabile avere anche solo 2-3 elementi"""
+- Se una categoria ha pochi dati, e' accettabile avere anche solo 2-3 elementi
+- Per paper_rilevanti: includi solo paper con impatto potenziale significativo, non tutti quelli trovati"""
 
     try:
         response = model.generate_content(prompt)
@@ -414,6 +475,7 @@ def _fallback_struttura(github_data, hn_data, reddit_data) -> dict:
             for r in github_data[:6]
         ],
         "aggiornamenti_framework": [],
+        "paper_rilevanti": [],
     }
 
 
@@ -669,23 +731,122 @@ def pubblica_su_github_pages() -> None:
         logger.warning(f"GitHub Pages push fallito: {e.stderr.decode(errors='replace')}")
 
 
-def notifica_iscritti(titolo: str, data_str: str, riassunto: str = "") -> None:
+def salva_json(dati: dict, data_str: str) -> None:
+    """Salva i dati strutturati del digest come JSON per il digest settimanale."""
+    json_path = WEB_DIR / "digests" / f"{data_str}.json"
+    json_path.parent.mkdir(parents=True, exist_ok=True)
+    json_path.write_text(json.dumps(dati, ensure_ascii=False, indent=2), encoding="utf-8")
+    logger.info(f"JSON dati salvato in: {json_path}")
+
+
+def carica_ultimi_json(n: int = 5) -> list[dict]:
+    """Carica gli ultimi n JSON di digest dalla cartella docs/digests/."""
+    pattern = sorted(
+        (WEB_DIR / "digests").glob("[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9].json"),
+        reverse=True,
+    )
+    risultati = []
+    for p in pattern[:n]:
+        try:
+            risultati.append({"data": p.stem, "dati": json.loads(p.read_text(encoding="utf-8"))})
+        except Exception:
+            pass
+    return risultati
+
+
+def summarize_weekly_with_gemini(digests: list[dict]) -> dict:
+    """Chiede a Gemini di selezionare il meglio della settimana dai digest quotidiani."""
+    genai.configure(api_key=GEMINI_API_KEY)
+    model = genai.GenerativeModel("gemini-2.5-flash")
+
+    prompt = f"""Sei un analista AI. Analizza i digest quotidiani degli ultimi {len(digests)} giorni e crea un "Best of Week" in italiano selezionando solo i contenuti piu' significativi e impattanti.
+
+DIGEST DEGLI ULTIMI {len(digests)} GIORNI:
+{json.dumps(digests, ensure_ascii=False, indent=2)}
+
+Seleziona massimo 5 elementi per categoria, privilegiando quelli con impatto maggiore. Rispondi SOLO con JSON valido, stesso formato del daily digest:
+{{"nuovi_strumenti": [...], "repo_trending": [...], "aggiornamenti_framework": [...], "paper_rilevanti": [...]}}"""
+
+    try:
+        response = model.generate_content(prompt)
+        text = response.text.strip()
+        if text.startswith("```"):
+            text = text.split("```")[1]
+            if text.startswith("json"):
+                text = text[4:]
+            text = text.strip()
+        return json.loads(text)
+    except Exception as e:
+        logger.error(f"Errore Gemini weekly: {e}")
+        return {"nuovi_strumenti": [], "repo_trending": [], "aggiornamenti_framework": [], "paper_rilevanti": []}
+
+
+def genera_weekly_digest() -> None:
+    """Genera il digest settimanale ogni venerdì aggregando gli ultimi 5 giorni."""
+    digests = carica_ultimi_json(5)
+    if not digests:
+        logger.warning("Nessun digest giornaliero trovato per il weekly.")
+        return
+
+    logger.info(f"Generazione weekly digest con {len(digests)} giorni di dati...")
+    dati_weekly = summarize_weekly_with_gemini(digests)
+
+    anno, settimana, _ = datetime.now().isocalendar()
+    week_str = f"{anno}-W{settimana:02d}"
+    titolo = f"Best of Week – Settimana {settimana} {anno}"
+
+    env = Environment(loader=FileSystemLoader(str(TEMPLATES_DIR)))
+    template = env.get_template("digest.html.j2")
+    html = template.render(
+        date=week_str,
+        date_long=titolo,
+        data=dati_weekly,
+        pdf_url=None,
+        is_weekly=True,
+    )
+
+    output_path = WEB_DIR / "digests" / f"weekly-{week_str}.html"
+    output_path.write_text(html, encoding="utf-8")
+    logger.info(f"Weekly digest salvato: {output_path}")
+
+    # Aggiorna indice weekly
+    weekly_index_path = WEB_DIR / "weekly.json"
+    try:
+        entries = json.loads(weekly_index_path.read_text(encoding="utf-8"))
+    except (FileNotFoundError, json.JSONDecodeError):
+        entries = []
+    entries = [e for e in entries if e.get("week") != week_str]
+    entries.insert(0, {"week": week_str, "title": titolo, "url": f"digests/weekly-{week_str}.html"})
+    weekly_index_path.write_text(json.dumps(entries, ensure_ascii=False, indent=2), encoding="utf-8")
+
+    # Notifica push settimanale
+    notifica_iscritti(titolo, week_str, "Il meglio dell'AI di questa settimana in un unico digest.", url_override=f"digests/weekly-{week_str}.html")
+
+
+def notifica_iscritti(titolo: str, data_str: str, riassunto: str = "", categories: list[str] | None = None, url_override: str | None = None) -> None:
     """Invia Web Push a tutti gli iscritti tramite il Cloudflare Worker."""
     if not WORKER_URL or not NOTIFY_SECRET:
         logger.warning("WORKER_URL o NOTIFY_SECRET mancanti — notifiche saltate.")
         return
 
-    page_url = (
-        f"{GITHUB_PAGES_BASE_URL.rstrip('/')}/digests/{data_str}.html"
-        if GITHUB_PAGES_BASE_URL
-        else "/"
-    )
+    if url_override:
+        page_url = f"{GITHUB_PAGES_BASE_URL.rstrip('/')}/{url_override}" if GITHUB_PAGES_BASE_URL else "/"
+    else:
+        page_url = f"{GITHUB_PAGES_BASE_URL.rstrip('/')}/digests/{data_str}.html" if GITHUB_PAGES_BASE_URL else "/"
+
+    payload = {
+        "title": titolo,
+        "body": riassunto or "Nuovo digest disponibile!",
+        "url": page_url,
+    }
+    if categories:
+        payload["categories"] = categories
 
     try:
         resp = requests.post(
             f"{WORKER_URL.rstrip('/')}/notify",
             headers={"Authorization": f"Bearer {NOTIFY_SECRET}", "Content-Type": "application/json"},
-            json={"title": titolo, "body": riassunto or "Nuovo digest disponibile!", "url": page_url},
+            json=payload,
             timeout=20,
         )
         resp.raise_for_status()
@@ -725,8 +886,11 @@ def main() -> None:
     logger.info("[1/4] Raccolta dati da Reddit...")
     reddit_data = fetch_reddit()
 
+    logger.info("[1/4] Raccolta paper da arXiv...")
+    arxiv_data = fetch_arxiv()
+
     totale = len(github_data) + len(hn_data) + len(reddit_data)
-    logger.info(f"Dati raccolti: {totale} elementi totali")
+    logger.info(f"Dati raccolti: {totale} elementi + {len(arxiv_data)} paper arXiv")
 
     if totale == 0:
         logger.error("Nessun dato raccolto. Controlla la connessione internet.")
@@ -734,18 +898,24 @@ def main() -> None:
 
     # --- Fase 2: Elaborazione con Gemini ---
     logger.info("[2/4] Elaborazione con Google Gemini...")
-    dati_strutturati = summarize_with_gemini(github_data, hn_data, reddit_data)
+    dati_strutturati = summarize_with_gemini(github_data, hn_data, reddit_data, arxiv_data)
 
     data_str = datetime.now().strftime("%Y-%m-%d")
 
-    # --- Fase 3: Generazione PDF + HTML ---
-    logger.info("[3/4] Generazione PDF e HTML...")
+    # --- Fase 3: Generazione PDF + HTML + JSON ---
+    logger.info("[3/4] Generazione PDF, HTML e JSON...")
     output_file = OUTPUT_DIR / f"AI_Digest_{data_str}.pdf"
     genera_pdf(dati_strutturati, output_file)
     genera_html(dati_strutturati, data_str, pdf_path=output_file)
+    salva_json(dati_strutturati, data_str)
 
     titolo_digest = f"Digest AI – {datetime.now().strftime('%-d %B %Y')}"
     aggiorna_indice(data_str, titolo_digest)
+
+    # Weekly digest ogni venerdì
+    if datetime.now().weekday() == 4:
+        logger.info("È venerdì — generazione digest settimanale...")
+        genera_weekly_digest()
 
     # --- Fase 4: Pubblicazione e notifiche ---
     logger.info("[4/4] Pubblicazione su GitHub Pages e invio notifiche...")
@@ -756,7 +926,15 @@ def main() -> None:
     if strumenti:
         primo_riassunto = strumenti[0].get("riassunto", "")[:120]
 
-    notifica_iscritti(titolo_digest, data_str, primo_riassunto)
+    categorie_presenti = [
+        cat for cat, chiave in [
+            ("strumenti", "nuovi_strumenti"),
+            ("repo", "repo_trending"),
+            ("framework", "aggiornamenti_framework"),
+            ("paper", "paper_rilevanti"),
+        ] if dati_strutturati.get(chiave)
+    ]
+    notifica_iscritti(titolo_digest, data_str, primo_riassunto, categories=categorie_presenti)
 
     logger.info("=" * 55)
     logger.info(f"  COMPLETATO -> {output_file}")

@@ -21,6 +21,10 @@
     #btn-iscrivi { background: #141e37; color: #fff; border: none; padding: 0.75rem 2rem; border-radius: 6px; font-size: 0.95rem; cursor: pointer; transition: background .2s; }
     #btn-iscrivi:hover:not(:disabled) { background: #286eb9; }
     #btn-iscrivi:disabled { background: #8ca5d2; cursor: default; }
+    .categorie { text-align: left; margin-bottom: 1rem; }
+    .categorie-label { font-size: 0.78rem; color: #60607a; margin-bottom: 0.4rem; }
+    .categorie label { display: inline-flex; align-items: center; gap: 0.3rem; font-size: 0.82rem; color: #373c55; margin: 0.2rem 0.4rem 0.2rem 0; cursor: pointer; }
+    .categorie input[type=checkbox] { accent-color: #141e37; }
     #btn-disiscriviti { background: none; border: 1px solid #c0392b; color: #c0392b; padding: 0.35rem 1rem; border-radius: 5px; font-size: 0.8rem; cursor: pointer; }
     #btn-disiscriviti:hover:not(:disabled) { background: #fdf0ef; }
     .contatore { font-size: 0.78rem; color: #8282a0; margin-top: 0.6rem; }
@@ -52,6 +56,13 @@
   <div class="subscribe-box">
     <h2>Ricevi le notifiche</h2>
     <p>Iscriviti per ricevere una notifica push ogni mattina quando il nuovo digest è pronto. Gratis, niente email.</p>
+    <div class="categorie">
+      <p class="categorie-label">Ricevi notifiche per:</p>
+      <label><input type="checkbox" name="cat" value="strumenti" checked> 🛠 Strumenti AI</label>
+      <label><input type="checkbox" name="cat" value="repo" checked> 📦 Repository GitHub</label>
+      <label><input type="checkbox" name="cat" value="framework" checked> 🔄 Framework</label>
+      <label><input type="checkbox" name="cat" value="paper" checked> 📄 Paper arXiv</label>
+    </div>
     <button id="btn-iscrivi">Iscriviti alle notifiche</button>
     <div id="stato" class="stato"></div>
     <div id="disiscriviti-box" style="display:none; margin-top:0.6rem;">
@@ -69,6 +80,11 @@
       <li>Apri l'app dalla home screen</li>
       <li>Poi clicca "Iscriviti"</li>
     </ol>
+  </div>
+
+  <div class="digests-section" id="weekly-section" style="display:none">
+    <h2>⭐ Digest Settimanale</h2>
+    <ul id="weekly-list"></ul>
   </div>
 
   <div class="digests-section">

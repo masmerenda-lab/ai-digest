@@ -51,12 +51,18 @@ async function handleSubscribe(request, env) {
     return json({ error: 'Invalid JSON' }, 400);
   }
 
-  if (!sub?.endpoint) {
-    return json({ error: 'Missing endpoint' }, 400);
-  }
+  // Separa preferences dal resto della PushSubscription
+  const { preferences, ...pushSub } = sub;
+  if (!pushSub?.endpoint) return json({ error: 'Missing endpoint' }, 400);
+
+  const ALL_CATEGORIES = ['strumenti', 'repo', 'framework', 'paper'];
+  const entry = {
+    subscription: pushSub,
+    preferences: Array.isArray(preferences) && preferences.length ? preferences : ALL_CATEGORIES,
+  };
 
   const key = crypto.randomUUID();
-  await env.SUBSCRIPTIONS.put(key, JSON.stringify(sub));
+  await env.SUBSCRIPTIONS.put(key, JSON.stringify(entry));
   return json({ ok: true, id: key }, 201);
 }
 
@@ -95,21 +101,31 @@ async function handleNotify(request, env) {
     return json({ error: 'Invalid JSON' }, 400);
   }
 
-  const { title = 'Digest AI', body = 'Nuovo digest disponibile!', url = '/' } = payload;
+  const { title = 'Digest AI', body = 'Nuovo digest disponibile!', url = '/', categories } = payload;
   const message = JSON.stringify({ title, body, url });
 
   const keys = await listAllKeys(env.SUBSCRIPTIONS);
 
-  let sent = 0, failed = 0, removed = 0;
+  let sent = 0, failed = 0, removed = 0, skipped = 0;
 
   await Promise.all(keys.map(async (kvKey) => {
     const raw = await env.SUBSCRIPTIONS.get(kvKey);
     if (!raw) return;
 
-    let sub;
-    try { sub = JSON.parse(raw); } catch { return; }
+    let entry;
+    try { entry = JSON.parse(raw); } catch { return; }
 
-    const result = await sendWebPush(sub, message, env);
+    // Supporta sia formato nuovo {subscription, preferences} che vecchio (diretto)
+    const pushSub = entry.subscription ?? entry;
+    const prefs = entry.preferences ?? null;
+
+    // Filtra per categorie se il subscriber ha preferenze e il payload le specifica
+    if (categories && prefs) {
+      const match = categories.some(c => prefs.includes(c));
+      if (!match) { skipped++; return; }
+    }
+
+    const result = await sendWebPush(pushSub, message, env);
 
     if (result === 'ok') {
       sent++;
@@ -121,7 +137,7 @@ async function handleNotify(request, env) {
     }
   }));
 
-  return json({ sent, failed, removed });
+  return json({ sent, failed, removed, skipped });
 }
 
 // ---------------------------------------------------------------------------

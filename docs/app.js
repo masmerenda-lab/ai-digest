@@ -8,6 +8,11 @@ function urlBase64ToUint8Array(base64String) {
   return Uint8Array.from([...raw].map(c => c.charCodeAt(0)));
 }
 
+function getPreferences() {
+  const checked = [...document.querySelectorAll('input[name="cat"]:checked')];
+  return checked.length ? checked.map(el => el.value) : ['strumenti', 'repo', 'framework', 'paper'];
+}
+
 async function iscrivi() {
   const btn = document.getElementById('btn-iscrivi');
   const stato = document.getElementById('stato');
@@ -40,14 +45,16 @@ async function iscrivi() {
       applicationServerKey: urlBase64ToUint8Array(VAPID_PUBLIC_KEY),
     });
 
+    const preferences = getPreferences();
     const resp = await fetch(`${WORKER_URL}/subscribe`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(sub),
+      body: JSON.stringify({ ...sub.toJSON(), preferences }),
     });
 
     if (!resp.ok) throw new Error(`Worker ha risposto ${resp.status}`);
     const { id } = await resp.json();
+    localStorage.setItem('subscription_preferences', JSON.stringify(preferences));
 
     stato.textContent = '✅ Iscritto! Riceverai una notifica ad ogni nuovo digest.';
     stato.className = 'stato ok';
@@ -137,6 +144,32 @@ document.addEventListener('DOMContentLoaded', () => {
   if (btnDis) btnDis.addEventListener('click', disiscriviti);
 
   aggiornaContatore();
+
+  // Mostra categorie selezionate precedentemente
+  const savedPrefs = localStorage.getItem('subscription_preferences');
+  if (savedPrefs) {
+    try {
+      const prefs = JSON.parse(savedPrefs);
+      document.querySelectorAll('input[name="cat"]').forEach(cb => {
+        cb.checked = prefs.includes(cb.value);
+      });
+    } catch {}
+  }
+
+  // Carica digest settimanali
+  fetch('./weekly.json')
+    .then(r => r.json())
+    .then(list => {
+      if (!list.length) return;
+      const sec = document.getElementById('weekly-section');
+      const ul = document.getElementById('weekly-list');
+      if (!sec || !ul) return;
+      sec.style.display = 'block';
+      ul.innerHTML = list.slice(0, 3).map(d =>
+        `<li><a href="./${d.url}">${d.title} <span class="digest-date">${d.week}</span></a></li>`
+      ).join('');
+    })
+    .catch(() => {});
 
   // Carica lista digest in homepage
   fetch('./digests.json')
