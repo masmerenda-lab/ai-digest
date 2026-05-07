@@ -29,6 +29,9 @@ export default {
     if (request.method === 'POST' && url.pathname === '/unsubscribe') {
       return handleUnsubscribe(request, env);
     }
+    if (request.method === 'POST' && url.pathname === '/update-preferences') {
+      return handleUpdatePreferences(request, env);
+    }
     if (request.method === 'GET' && url.pathname === '/subscribers/count') {
       return handleCount(env);
     }
@@ -74,6 +77,25 @@ async function handleUnsubscribe(request, env) {
   try { body = await request.json(); } catch { return json({ error: 'Invalid JSON' }, 400); }
   if (!body?.id) return json({ error: 'Missing id' }, 400);
   await env.SUBSCRIPTIONS.delete(body.id);
+  return json({ ok: true });
+}
+
+// ---------------------------------------------------------------------------
+// POST /update-preferences
+// ---------------------------------------------------------------------------
+async function handleUpdatePreferences(request, env) {
+  let body;
+  try { body = await request.json(); } catch { return json({ error: 'Invalid JSON' }, 400); }
+  const { id, preferences } = body;
+  if (!id || !Array.isArray(preferences) || !preferences.length) {
+    return json({ error: 'Missing id or preferences' }, 400);
+  }
+  const raw = await env.SUBSCRIPTIONS.get(id);
+  if (!raw) return json({ error: 'Not found' }, 404);
+  let entry;
+  try { entry = JSON.parse(raw); } catch { return json({ error: 'Invalid entry' }, 500); }
+  const subscription = entry.subscription ?? entry;
+  await env.SUBSCRIPTIONS.put(id, JSON.stringify({ subscription, preferences }));
   return json({ ok: true });
 }
 

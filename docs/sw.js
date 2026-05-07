@@ -12,13 +12,14 @@ self.addEventListener('push', event => {
 
 self.addEventListener('notificationclick', event => {
   event.notification.close();
+  const url = event.notification.data.url;
   event.waitUntil(
     clients.matchAll({ type: 'window', includeUncontrolled: true }).then(list => {
-      const url = event.notification.data.url;
+      // Cerca una finestra già aperta sul dominio e naviga direttamente al digest
       for (const client of list) {
-        if (client.url === url && 'focus' in client) return client.focus();
+        if ('navigate' in client) return client.navigate(url).then(c => c?.focus());
       }
-      if (clients.openWindow) return clients.openWindow(url);
+      return clients.openWindow(url);
     })
   );
 });

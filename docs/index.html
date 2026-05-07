@@ -25,12 +25,17 @@
     .categorie-label { font-size: 0.78rem; color: #60607a; margin-bottom: 0.4rem; }
     .categorie label { display: inline-flex; align-items: center; gap: 0.3rem; font-size: 0.82rem; color: #373c55; margin: 0.2rem 0.4rem 0.2rem 0; cursor: pointer; }
     .categorie input[type=checkbox] { accent-color: #141e37; }
-    #btn-disiscriviti { background: none; border: 1px solid #c0392b; color: #c0392b; padding: 0.35rem 1rem; border-radius: 5px; font-size: 0.8rem; cursor: pointer; }
-    #btn-disiscriviti:hover:not(:disabled) { background: #fdf0ef; }
     .contatore { font-size: 0.78rem; color: #8282a0; margin-top: 0.6rem; }
     .stato { font-size: 0.82rem; margin-top: 0.75rem; min-height: 1.2em; }
     .stato.ok { color: #22824f; }
     .stato.errore { color: #c0392b; }
+    /* Profilo iscritto */
+    .profile-badge { display: inline-flex; align-items: center; gap: 0.4rem; background: #f0faf4; color: #22824f; font-weight: 700; font-size: 0.88rem; padding: 0.4rem 0.9rem; border-radius: 20px; margin-bottom: 1rem; border: 1px solid #c3e8d4; }
+    .profile-actions { display: flex; gap: 0.6rem; justify-content: center; flex-wrap: wrap; margin-top: 1rem; }
+    #btn-update-prefs { background: #141e37; color: #fff; border: none; padding: 0.5rem 1.2rem; border-radius: 5px; font-size: 0.82rem; cursor: pointer; }
+    #btn-update-prefs:hover { background: #286eb9; }
+    #btn-disiscriviti { background: none; border: 1px solid #c0392b; color: #c0392b; padding: 0.5rem 1rem; border-radius: 5px; font-size: 0.82rem; cursor: pointer; }
+    #btn-disiscriviti:hover:not(:disabled) { background: #fdf0ef; }
     .ios-hint { background: #fff8e1; border: 1px solid #ffe082; border-radius: 8px; margin: 0 1rem 1rem; padding: 1rem 1.1rem; font-size: 0.82rem; color: #5d4037; }
     .ios-hint strong { display: block; margin-bottom: 0.3rem; }
     .ios-hint ol { padding-left: 1.2rem; line-height: 1.8; }
@@ -54,20 +59,39 @@
   </div>
 
   <div class="subscribe-box">
-    <h2>Ricevi le notifiche</h2>
-    <p>Iscriviti per ricevere una notifica push ogni mattina quando il nuovo digest è pronto. Gratis, niente email.</p>
-    <div class="categorie">
-      <p class="categorie-label">Ricevi notifiche per:</p>
-      <label><input type="checkbox" name="cat" value="strumenti" checked> 🛠 Strumenti AI</label>
-      <label><input type="checkbox" name="cat" value="repo" checked> 📦 Repository GitHub</label>
-      <label><input type="checkbox" name="cat" value="framework" checked> 🔄 Framework</label>
-      <label><input type="checkbox" name="cat" value="paper" checked> 📄 Paper arXiv</label>
+
+    <!-- Vista: non iscritto -->
+    <div id="view-subscribe">
+      <h2>Ricevi le notifiche</h2>
+      <p>Iscriviti per ricevere una notifica push ogni mattina quando il nuovo digest è pronto. Gratis, niente email.</p>
+      <div class="categorie">
+        <p class="categorie-label">Ricevi notifiche per:</p>
+        <label><input type="checkbox" name="cat" value="strumenti" checked> 🛠 Strumenti AI</label>
+        <label><input type="checkbox" name="cat" value="repo" checked> 📦 Repository GitHub</label>
+        <label><input type="checkbox" name="cat" value="framework" checked> 🔄 Framework</label>
+        <label><input type="checkbox" name="cat" value="paper" checked> 📄 Paper arXiv</label>
+      </div>
+      <button id="btn-iscrivi">Iscriviti alle notifiche</button>
+      <div id="stato" class="stato"></div>
     </div>
-    <button id="btn-iscrivi">Iscriviti alle notifiche</button>
-    <div id="stato" class="stato"></div>
-    <div id="disiscriviti-box" style="display:none; margin-top:0.6rem;">
-      <button id="btn-disiscriviti">Disiscriviti</button>
+
+    <!-- Vista: già iscritto (profilo) -->
+    <div id="view-profile" style="display:none">
+      <div class="profile-badge">✓ Iscritto su questo dispositivo</div>
+      <div class="categorie">
+        <p class="categorie-label">Le tue categorie (modifica e salva):</p>
+        <label><input type="checkbox" name="pref" value="strumenti" checked> 🛠 Strumenti AI</label>
+        <label><input type="checkbox" name="pref" value="repo" checked> 📦 Repository GitHub</label>
+        <label><input type="checkbox" name="pref" value="framework" checked> 🔄 Framework</label>
+        <label><input type="checkbox" name="pref" value="paper" checked> 📄 Paper arXiv</label>
+      </div>
+      <div id="prefs-stato" class="stato"></div>
+      <div class="profile-actions">
+        <button id="btn-update-prefs">Salva preferenze</button>
+        <button id="btn-disiscriviti">Disiscriviti</button>
+      </div>
     </div>
+
     <div id="contatore" class="contatore"></div>
   </div>
 
