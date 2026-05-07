@@ -1,6 +1,6 @@
 // Sostituire con la VAPID_PUBLIC_KEY reale dopo aver eseguito la generazione keys
 const VAPID_PUBLIC_KEY = 'BFjOBWVXRmrwQLkJqAH29gcbzx104Bg4_DAFCDuClaHvHNAO4gWUW5c1csadlVBdq2YpPLA-m-GPeg0KjC0CC3Y';
-const WORKER_URL = 'SOSTITUIRE_CON_URL_CLOUDFLARE_WORKER';
+const WORKER_URL = 'https://ai-digest-notify.masmerenda.workers.dev';
 
 function urlBase64ToUint8Array(base64String) {
   const padding = '='.repeat((4 - base64String.length % 4) % 4);
