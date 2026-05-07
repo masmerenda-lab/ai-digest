@@ -597,7 +597,7 @@ def genera_pdf(dati: dict, output_path: Path) -> None:
 # Modulo 6: Pubblicazione web + Web Push
 # ---------------------------------------------------------------------------
 
-WEB_DIR = Path(__file__).parent / "web"
+WEB_DIR = Path(__file__).parent / "docs"
 TEMPLATES_DIR = Path(__file__).parent / "templates"
 WORKER_URL = os.getenv("WORKER_URL", "")
 NOTIFY_SECRET = os.getenv("NOTIFY_SECRET", "")
@@ -650,7 +650,7 @@ def pubblica_su_github_pages() -> None:
     """Committa e pusha web/ sul repository GitHub Pages."""
     repo_dir = Path(__file__).parent
     try:
-        subprocess.run(["git", "add", "web/"], cwd=repo_dir, check=True, capture_output=True)
+        subprocess.run(["git", "add", "docs/"], cwd=repo_dir, check=True, capture_output=True)
         result = subprocess.run(
             ["git", "diff", "--cached", "--quiet"],
             cwd=repo_dir, capture_output=True

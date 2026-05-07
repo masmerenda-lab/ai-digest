@@ -1,0 +1,15 @@
+# Destinatari WhatsApp per il Digest Quotidiano AI
+#
+# Aggiungi un numero per riga nel formato internazionale: +39XXXXXXXXXX
+# Le righe che iniziano con '#' sono commenti e vengono ignorate.
+#
+# NOTA TWILIO SANDBOX: prima di ricevere messaggi, ogni destinatario
+# deve inviare il codice di join a whatsapp:+14155238886
+# (es. "join <parola-parola>" — trovi il codice nella console Twilio).
+#
+# Esempi:
++393388066404
++393341555139
++393485216490
++393404002198
+
