@@ -6,3 +6,6 @@ __pycache__/
 digest.log
 node_modules/
 .wrangler/
+.DS_Store
+._*
+whatsapp_recipients.txt
