@@ -1,0 +1,13 @@
+name = "ai-digest-notify"
+main = "src/index.js"
+compatibility_date = "2024-01-01"
+
+[[kv_namespaces]]
+binding = "SUBSCRIPTIONS"
+id = "27c1717f2c754bce93a796948d9e2013"
+
+# Segreti da settare con: wrangler secret put NOME_SEGRETO
+# - VAPID_PRIVATE_KEY   (chiave privata VAPID in formato PEM o base64url)
+# - VAPID_PUBLIC_KEY    (chiave pubblica VAPID in formato base64url)
+# - VAPID_SUBJECT       (es. "mailto:tuo@email.com")
+# - NOTIFY_SECRET       (stringa casuale, stessa di .env NOTIFY_SECRET)

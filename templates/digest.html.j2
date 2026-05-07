@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digest AI – {{ date }}</title>
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .digest-header { background: #141e37; color: #fff; padding: 2rem 1.5rem 1.5rem; text-align: center; }
+    .digest-header h1 { margin: 0 0 0.3rem; font-size: 1.6rem; }
+    .digest-header .date { color: #b4c8f0; font-size: 0.95rem; }
+    .digest-header .sub { color: #8ca5d2; font-size: 0.82rem; margin-top: 0.25rem; }
+    .section { padding: 1.2rem 1rem 0.5rem; }
+    .section-title { font-size: 1rem; font-weight: 700; padding: 0.5rem 0.75rem; border-radius: 4px; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.4rem; }
+    .section-title.green  { color: #22824f; background: #f0faf4; border-left: 3px solid #22824f; }
+    .section-title.blue   { color: #286eb9; background: #f0f6ff; border-left: 3px solid #286eb9; }
+    .section-title.orange { color: #af551e; background: #fdf5ef; border-left: 3px solid #af551e; }
+    .item { padding: 0.75rem 0; border-bottom: 1px solid #e8eaf0; }
+    .item:last-child { border-bottom: none; }
+    .item-title { font-weight: 700; font-size: 0.92rem; color: #191e37; margin-bottom: 0.35rem; }
+    .item-summary { font-size: 0.85rem; color: #373c55; line-height: 1.5; margin-bottom: 0.3rem; }
+    .item-meta { font-size: 0.75rem; color: #8282a0; }
+    .item-meta a { color: #326ebe; text-decoration: none; }
+    .item-meta a:hover { text-decoration: underline; }
+    .stars { color: #c88200; font-weight: 600; }
+    .back-link { display: block; text-align: center; padding: 1.5rem; font-size: 0.85rem; color: #326ebe; }
+    .pdf-link { display: inline-block; margin-top: 0.75rem; padding: 0.4rem 0.9rem; background: #141e37; color: #fff; border-radius: 4px; font-size: 0.8rem; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <div class="digest-header">
+    <h1>Digest Quotidiano AI</h1>
+    <div class="date">{{ date_long }}</div>
+    <div class="sub">Le ultime novità nel mondo dell'intelligenza artificiale</div>
+    {% if pdf_url %}
+    <a class="pdf-link" href="{{ pdf_url }}">⬇ Scarica PDF</a>
+    {% endif %}
+  </div>
+
+  {% macro render_section(title, items, cls, icon) %}
+  {% if items %}
+  <div class="section">
+    <div class="section-title {{ cls }}">{{ icon }} {{ title }}</div>
+    {% for item in items %}
+    <div class="item">
+      <div class="item-title">{{ loop.index }}. {{ item.titolo }}</div>
+      {% if item.riassunto %}<div class="item-summary">{{ item.riassunto }}</div>{% endif %}
+      <div class="item-meta">
+        {% if item.stelle_oggi %}<span class="stars">★ {{ item.stelle_oggi }}</span> &nbsp;{% endif %}
+        {% if item.url %}<a href="{{ item.url }}" target="_blank" rel="noopener">{{ item.url[:80] }}{% if item.url|length > 80 %}…{% endif %}</a>{% endif %}
+        {% if item.fonte %} &nbsp;·&nbsp; {{ item.fonte }}{% endif %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+  {% endmacro %}
+
+  {{ render_section("Nuovi Strumenti e Servizi AI", data.nuovi_strumenti, "green", "🛠") }}
+  {{ render_section("Repository GitHub in Tendenza", data.repo_trending, "blue", "📦") }}
+  {{ render_section("Aggiornamenti Framework e Librerie", data.aggiornamenti_framework, "orange", "🔄") }}
+
+  <a class="back-link" href="../index.html">← Tutti i digest</a>
+</body>
+</html>

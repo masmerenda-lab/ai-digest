@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digest Quotidiano AI</title>
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#141e37">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="AI Digest">
+  <link rel="apple-touch-icon" href="/icon-192.png">
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    .hero { background: #141e37; color: #fff; padding: 2.5rem 1.5rem 2rem; text-align: center; }
+    .hero h1 { font-size: 1.7rem; margin-bottom: 0.4rem; }
+    .hero p { color: #b4c8f0; font-size: 0.9rem; }
+    .subscribe-box { background: #fff; border-radius: 10px; margin: 1.5rem 1rem; padding: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,.08); text-align: center; }
+    .subscribe-box h2 { font-size: 1.05rem; margin-bottom: 0.5rem; color: #191e37; }
+    .subscribe-box p { font-size: 0.85rem; color: #60607a; margin-bottom: 1.2rem; }
+    #btn-iscrivi { background: #141e37; color: #fff; border: none; padding: 0.75rem 2rem; border-radius: 6px; font-size: 0.95rem; cursor: pointer; transition: background .2s; }
+    #btn-iscrivi:hover:not(:disabled) { background: #286eb9; }
+    #btn-iscrivi:disabled { background: #8ca5d2; cursor: default; }
+    .stato { font-size: 0.82rem; margin-top: 0.75rem; min-height: 1.2em; }
+    .stato.ok { color: #22824f; }
+    .stato.errore { color: #c0392b; }
+    .ios-hint { background: #fff8e1; border: 1px solid #ffe082; border-radius: 8px; margin: 0 1rem 1rem; padding: 1rem 1.1rem; font-size: 0.82rem; color: #5d4037; }
+    .ios-hint strong { display: block; margin-bottom: 0.3rem; }
+    .ios-hint ol { padding-left: 1.2rem; line-height: 1.8; }
+    .digests-section { background: #fff; border-radius: 10px; margin: 0 1rem 1.5rem; padding: 1.2rem; box-shadow: 0 2px 8px rgba(0,0,0,.08); }
+    .digests-section h2 { font-size: 1rem; color: #191e37; margin-bottom: 0.75rem; }
+    #digest-list { list-style: none; padding: 0; }
+    #digest-list li { padding: 0.5rem 0; border-bottom: 1px solid #eef0f6; }
+    #digest-list li:last-child { border-bottom: none; }
+    #digest-list a { text-decoration: none; color: #286eb9; font-size: 0.88rem; display: flex; justify-content: space-between; gap: 0.5rem; }
+    #digest-list a:hover { text-decoration: underline; }
+    .digest-date { color: #8282a0; font-size: 0.78rem; white-space: nowrap; }
+    #digest-list:empty::after { content: 'Nessun digest ancora disponibile.'; color: #8282a0; font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+  <div class="hero">
+    <h1>Digest Quotidiano AI</h1>
+    <p>Le ultime novità nel mondo dell'intelligenza artificiale, ogni giorno</p>
+  </div>
+
+  <div class="subscribe-box">
+    <h2>Ricevi le notifiche</h2>
+    <p>Iscriviti per ricevere una notifica push ogni mattina quando il nuovo digest è pronto. Gratis, niente email.</p>
+    <button id="btn-iscrivi">Iscriviti alle notifiche</button>
+    <div id="stato" class="stato"></div>
+  </div>
+
+  <div class="ios-hint" id="ios-hint" style="display:none">
+    <strong>📱 Su iPhone: installa prima l'app</strong>
+    Le notifiche push su iOS richiedono che la PWA sia installata sulla home screen:
+    <ol>
+      <li>Apri questa pagina in <strong>Safari</strong></li>
+      <li>Tocca <strong>Condividi</strong> (icona in basso) → <strong>Aggiungi a Home</strong></li>
+      <li>Apri l'app dalla home screen</li>
+      <li>Poi clicca "Iscriviti"</li>
+    </ol>
+  </div>
+
+  <div class="digests-section">
+    <h2>Ultimi digest</h2>
+    <ul id="digest-list"></ul>
+  </div>
+
+  <script>
+    // Mostra hint iOS se siamo su Safari iOS fuori dalla standalone mode
+    const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+    const isStandalone = window.navigator.standalone;
+    if (isIOS && !isStandalone) {
+      document.getElementById('ios-hint').style.display = 'block';
+    }
+  </script>
+  <script src="/app.js"></script>
+</body>
+</html>
