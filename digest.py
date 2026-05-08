@@ -345,8 +345,8 @@ def summarize_with_gemini(
         Dict con chiavi: nuovi_strumenti, repo_trending, aggiornamenti_framework, paper_rilevanti
     """
     genai.configure(api_key=GEMINI_API_KEY)
-    model = genai.GenerativeModel("gemini-2.5-flash")
-    logger.info("Modello Gemini in uso: gemini-2.5-flash")
+    model = genai.GenerativeModel("gemini-2.5-pro")
+    logger.info("Modello Gemini in uso: gemini-2.5-pro")
 
     raw_data = {
         "github_trending": github_data,
@@ -355,16 +355,22 @@ def summarize_with_gemini(
         "arxiv_papers": arxiv_data or [],
     }
 
-    prompt = f"""Sei un esperto analista di intelligenza artificiale. Analizza i dati raccolti oggi da GitHub Trending, Hacker News, Reddit e arXiv e crea un digest strutturato in italiano.
+    prompt = f"""Sei un giornalista tecnologico esperto di intelligenza artificiale che scrive per un pubblico di professionisti italiani del settore tech.
+Analizza i dati raccolti oggi da GitHub Trending, Hacker News, Reddit e arXiv e crea un digest quotidiano di alta qualita' in italiano.
 
 DATI RACCOLTI (JSON grezzo):
 {json.dumps(raw_data, ensure_ascii=False, indent=2)}
 
 Il tuo compito:
-1. Analizza tutti gli elementi
-2. Classificali in 4 categorie (vedi sotto)
-3. Scegli i 5-8 piu' significativi per ogni categoria
-4. Scrivi un riassunto di 2-3 frasi in italiano per ognuno
+1. Seleziona i 5-7 elementi piu' rilevanti e significativi per ogni categoria
+2. Per ogni elemento scrivi una descrizione ricca e utile: 4-6 frasi in italiano
+3. La descrizione deve spiegare: cosa e', perche' e' rilevante OGGI, quale problema risolve, chi ne beneficia, e cosa lo distingue da soluzioni simili gia' esistenti
+
+STANDARD DI QUALITA' PER I RIASSUNTI:
+- Evita descrizioni generiche come "e' uno strumento utile per..."
+- Includi dettagli concreti: numeri di performance, confronti, casi d'uso specifici
+- Spiega l'impatto reale nel contesto del panorama AI attuale
+- Usa un tono da esperto che parla a colleghi, non da comunicato stampa
 
 CATEGORIE:
 - "nuovi_strumenti": Nuovi tool AI, prodotti, servizi, assistenti, API, piattaforme lanciate di recente o con aggiornamenti importanti
@@ -377,7 +383,7 @@ FORMATO OUTPUT (JSON puro, nessun testo aggiuntivo, nessun markdown):
   "nuovi_strumenti": [
     {{
       "titolo": "Nome strumento o servizio",
-      "riassunto": "2-3 frasi in italiano. Cosa fa, perche' e' rilevante, per chi e' utile.",
+      "riassunto": "4-6 frasi. Descrizione precisa di cosa fa, quale gap colma nel mercato, a chi e' rivolto, cosa lo distingue dalla concorrenza, e perche' vale la pena provarlo oggi.",
       "url": "URL diretto allo strumento/articolo",
       "fonte": "Fonte originale"
     }}
@@ -385,7 +391,7 @@ FORMATO OUTPUT (JSON puro, nessun testo aggiuntivo, nessun markdown):
   "repo_trending": [
     {{
       "titolo": "owner/nome-repository",
-      "riassunto": "2-3 frasi in italiano. Cosa fa il repo, perche' sta guadagnando popolarita'.",
+      "riassunto": "4-6 frasi. Cosa implementa il repo, quale problema tecnico risolve, perche' sta raccogliendo interesse proprio ora, come si usa in pratica e cosa lo rende migliore delle alternative.",
       "stelle_oggi": "stelle guadagnate oggi o stringa vuota",
       "url": "URL GitHub del repository",
       "fonte": "GitHub Trending"
@@ -394,26 +400,27 @@ FORMATO OUTPUT (JSON puro, nessun testo aggiuntivo, nessun markdown):
   "aggiornamenti_framework": [
     {{
       "titolo": "Nome framework - versione o tipo aggiornamento",
-      "riassunto": "2-3 frasi in italiano sulle novita' principali.",
+      "riassunto": "4-6 frasi. Cosa cambia in questa versione, quali breaking changes ci sono, quali nuove funzionalita' sono state aggiunte e come impattano i progetti esistenti.",
       "url": "URL alla release notes o all'annuncio",
       "fonte": "Fonte"
     }}
   ],
   "paper_rilevanti": [
     {{
-      "titolo": "Titolo paper",
-      "riassunto": "2-3 frasi in italiano: contributo principale, dataset/metodo usato, risultato chiave.",
+      "titolo": "Titolo paper in italiano se possibile",
+      "riassunto": "4-6 frasi. Qual e' la domanda di ricerca, quale metodo propongono, su quali dataset hanno testato, quali risultati quantitativi hanno ottenuto e perche' questo lavoro fa avanzare lo stato dell'arte.",
       "url": "URL arXiv (es. https://arxiv.org/abs/XXXX.XXXXX)",
       "fonte": "arXiv"
     }}
   ]
 }}
 
-REGOLE IMPORTANTI:
+REGOLE ASSOLUTE:
 - Rispondi SOLO con il JSON valido, zero testo prima o dopo
-- I riassunti devono essere SEMPRE in italiano
-- Se una categoria ha pochi dati, e' accettabile avere anche solo 2-3 elementi
-- Per paper_rilevanti: includi solo paper con impatto potenziale significativo, non tutti quelli trovati"""
+- Tutti i riassunti DEVONO essere in italiano
+- Mai meno di 4 frasi per riassunto: se non hai abbastanza informazioni sull'elemento, non includerlo
+- Per paper_rilevanti: solo paper con contributo tecnico concreto e misurabile, non survey o position paper generici
+- Qualita' prima della quantita': 5 elementi eccellenti valgono piu' di 8 mediocri"""
 
     try:
         response = model.generate_content(prompt)
@@ -757,9 +764,9 @@ def carica_ultimi_json(n: int = 5) -> list[dict]:
 def summarize_weekly_with_gemini(digests: list[dict]) -> dict:
     """Chiede a Gemini di selezionare il meglio della settimana dai digest quotidiani."""
     genai.configure(api_key=GEMINI_API_KEY)
-    model = genai.GenerativeModel("gemini-2.5-flash")
+    model = genai.GenerativeModel("gemini-2.5-pro")
 
-    prompt = f"""Sei un analista AI. Analizza i digest quotidiani degli ultimi {len(digests)} giorni e crea un "Best of Week" in italiano selezionando solo i contenuti piu' significativi e impattanti.
+    prompt = f"""Sei un giornalista tecnologico esperto di AI. Analizza i digest quotidiani degli ultimi {len(digests)} giorni e crea un "Best of Week" selezionando solo i contenuti con maggiore impatto reale.
 
 DIGEST DEGLI ULTIMI {len(digests)} GIORNI:
 {json.dumps(digests, ensure_ascii=False, indent=2)}
