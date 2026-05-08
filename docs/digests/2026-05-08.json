@@ -1,86 +1,124 @@
 {
   "nuovi_strumenti": [
     {
-      "titolo": "A polynomial autoencoder beats PCA on transformer embeddings",
-      "riassunto": "https://ivanpleshkov.dev/blog/polynomial-autoencoder/",
-      "url": "https://ivanpleshkov.dev/blog/polynomial-autoencoder/",
+      "titolo": "AWS Bedrock AgentCore Payments",
+      "riassunto": "AWS introduce una funzionalità rivoluzionaria per gli agenti AI su Bedrock, dotandoli di \"wallet\" per effettuare transazioni reali. Integrandosi con Stripe e Coinbase, gli agenti possono ora pagare per l'accesso ad API, contenuti web o servizi, superando i limiti dei tradizionali piani gratuiti. Questo abilita la creazione di agenti autonomi in grado di completare task complessi end-to-end, come prenotare un viaggio o gestire sottoscrizioni software. L'iniziativa segna un passo cruciale verso l'economia delle macchine, dove gli agenti agiscono come entità economiche indipendenti nel mondo digitale.",
+      "url": "https://aws.amazon.com/blogs/machine-learning/agents-that-transact-introducing-amazon-bedrock-agentcore-payments-built-with-coinbase-and-stripe/",
       "fonte": "Hacker News"
     },
     {
-      "titolo": "AI slop is killing online communities",
-      "riassunto": "https://rmoff.net/2026/05/06/ai-slop-is-killing-online-communities/",
-      "url": "https://rmoff.net/2026/05/06/ai-slop-is-killing-online-communities/",
+      "titolo": "Installazione Silenziosa del Modello AI di Google Chrome",
+      "riassunto": "Google sta distribuendo silenziosamente un modello AI da 4 GB, parte della famiglia Gemini Nano, all'interno di Google Chrome su dispositivi desktop. L'installazione avviene in background e senza un consenso esplicito, sollevando significative preoccupazioni sulla privacy e sull'utilizzo delle risorse di sistema. Sebbene l'obiettivo sia abilitare funzionalità AI on-device come il riassunto di testi, la mancanza di trasparenza ha generato un acceso dibattito nella community. Questo evento evidenzia la tensione tra l'avanzamento dell'AI \"at the edge\" e il diritto degli utenti al controllo dei propri dispositivi.",
+      "url": "https://www.thatprivacyguy.com/blog/chrome-silent-nano-install/",
       "fonte": "Hacker News"
     },
     {
-      "titolo": "Two Home Affairs officials suspended after AI 'hallucinations' found",
-      "riassunto": "https://www.citizen.co.za/news/home-affairs-officials-suspended-ai-hallucinations/",
-      "url": "https://www.citizen.co.za/news/home-affairs-officials-suspended-ai-hallucinations/",
+      "titolo": "InsForge: Piattaforma Backend per Agenti di Coding",
+      "riassunto": "InsForge si propone come la piattaforma backend open-source all-in-one per lo sviluppo di agenti di coding. Il progetto mira a risolvere il problema dell'infrastruttura fornendo agli agenti AI strumenti essenziali come database, autenticazione, storage, e un gateway AI per interagire con vari LLM. A differenza di approcci più frammentati, InsForge offre un ambiente integrato per consentire agli agenti di creare e deployare applicazioni full-stack in modo end-to-end. È una soluzione promettente per chiunque stia costruendo sistemi agentici complessi e necessiti di una solida base infrastrutturale.",
+      "url": "https://github.com/InsForge/InsForge",
+      "fonte": "GitHub Trending"
+    },
+    {
+      "titolo": "Architettura Vocale a Bassa Latenza di OpenAI",
+      "riassunto": "OpenAI ha pubblicato un approfondimento tecnico su come riesce a fornire interazioni vocali a bassa latenza su larga scala per ChatGPT. L'articolo descrive un'architettura complessa che combina tre modelli distinti (ASR, LLM, TTS) e ottimizzazioni a livello di rete, come l'uso di data center custom e protocolli di rete specializzati. La sfida principale superata è la gestione del flusso di token e audio per ridurre al minimo il \"time-to-first-token\", creando un'esperienza di conversazione naturale e fluida. Questi insight sono di valore inestimabile per gli ingegneri che sviluppano applicazioni AI real-time, mostrando soluzioni concrete a problemi di scalabilità e latenza.",
+      "url": "https://openai.com/index/delivering-low-latency-voice-ai-at-scale/",
       "fonte": "Hacker News"
     },
     {
-      "titolo": "GPT-5.5 Price Increase: What It Costs",
-      "riassunto": "https://openrouter.ai/announcements/gpt55-cost-analysis",
-      "url": "https://openrouter.ai/announcements/gpt55-cost-analysis",
-      "fonte": "Hacker News"
-    },
-    {
-      "titolo": "Making LLM Training Faster with Unsloth and NVIDIA",
-      "riassunto": "https://unsloth.ai/blog/nvidia-collab",
-      "url": "https://unsloth.ai/blog/nvidia-collab",
-      "fonte": "Hacker News"
-    },
-    {
-      "titolo": "Show HN: AnamDB – An AI-native, differentiable Datalog engine written in Rust",
-      "riassunto": "https://github.com/jam5991/anam",
-      "url": "https://github.com/jam5991/anam",
+      "titolo": "Stage CLI: Revisione Locale delle Modifiche Generate da AI",
+      "riassunto": "Stage CLI è una nuova utility a riga di comando che semplifica il processo di revisione delle modifiche al codice generate da agenti AI o strumenti come Copilot. Invece di applicare direttamente un `diff` o un `patch`, lo strumento crea una branch temporanea con le modifiche, permettendo agli sviluppatori di ispezionarle, testarle ed editarle nel proprio IDE prima di approvarle. Risolve il problema della fiducia e del controllo sulle modifiche automatiche, integrandosi facilmente nei workflow di sviluppo esistenti. Questo tool è particolarmente utile per chi adotta massicciamente l'assistenza al coding AI e vuole mantenere un alto standard di qualità del codice.",
+      "url": "https://github.com/ReviewStage/stage-cli",
       "fonte": "Hacker News"
     }
   ],
   "repo_trending": [
     {
+      "titolo": "addyosmani / agent-skills",
+      "riassunto": "Questo repository, creato da Addy Osmani di Google, sta esplodendo in popolarità perché affronta una debolezza chiave degli agenti di coding: la mancanza di \"competenze ingegneristiche\" di livello production. Il progetto non è un nuovo agente, ma una raccolta di skill riutilizzabili, come la gestione di test, il debugging e il refactoring, che possono essere integrate in qualsiasi agente AI. L'obiettivo è trasformare gli agenti da semplici generatori di snippet a veri e propri collaboratori capaci di seguire le best practice dello sviluppo software. Il suo successo odierno riflette l'urgenza della community di rendere gli agenti AI più affidabili e pronti per il mondo reale.",
+      "stelle_oggi": "3,062 stars today",
+      "url": "https://github.com/addyosmani/agent-skills",
+      "fonte": "GitHub Trending"
+    },
+    {
       "titolo": "anthropics / financial-services",
-      "riassunto": "",
+      "riassunto": "Anthropic ha rilasciato un repository che sta attirando grande attenzione per la sua applicabilità diretta in un settore ad alto valore: i servizi finanziari. Il repo contiene una serie di \"ricette\" e prompt ingegnerizzati per utilizzare i modelli Claude 3 in compiti specifici come l'analisi di report finanziari, la valutazione del rischio e la generazione di consulenze di investimento. A differenza di esempi generici, questi forniscono un blueprint pratico e testato per integrare LLM avanzati in workflow enterprise. La sua popolarità è dovuta al fatto che offre un acceleratore concreto per le aziende del settore che vogliono sfruttare l'IA generativa in modo sicuro e conforme.",
       "stelle_oggi": "1,343 stars today",
       "url": "https://github.com/anthropics/financial-services",
       "fonte": "GitHub Trending"
     },
     {
-      "titolo": "LearningCircuit / local-deep-research",
-      "riassunto": "~95% on SimpleQA (e.g. Qwen3.6-27B on a 3090). Supports all local and cloud LLMs (llama.cpp, Ollama, Google, ...). 10+ search engines - arXiv, PubMed, your private documents. Everything Local & Encrypted.",
-      "stelle_oggi": "559 stars today",
-      "url": "https://github.com/LearningCircuit/local-deep-research",
-      "fonte": "GitHub Trending"
-    },
-    {
       "titolo": "VectifyAI / PageIndex",
-      "riassunto": "📑 PageIndex: Document Index for Vectorless, Reasoning-based RAG",
+      "riassunto": "PageIndex sta guadagnando trazione perché propone un'alternativa radicale al RAG basato su vector search, un approccio ormai quasi standard. Invece di fare l'embedding di chunk di testo, PageIndex crea un indice gerarchico e semantico dei documenti, simile a un indice analitico di un libro, che l'LLM può poi \"navigare\" tramite ragionamento. Questo approccio \"vectorless\" mira a risolvere i problemi di precisione del recupero semantico e a migliorare l'interpretabilità del processo RAG. L'interesse per questo progetto evidenzia una crescente ricerca di alternative più robuste e basate sul ragionamento per l'integrazione della conoscenza negli LLM.",
       "stelle_oggi": "943 stars today",
       "url": "https://github.com/VectifyAI/PageIndex",
       "fonte": "GitHub Trending"
     },
     {
       "titolo": "PriorLabs / TabPFN",
-      "riassunto": "⚡ TabPFN: Foundation Model for Tabular Data ⚡",
+      "riassunto": "TabPFN è un \"foundation model\" progettato specificamente per i dati tabellari, un dominio storicamente dominato da algoritmi come XGBoost e LightGBM. La sua popolarità deriva dal fatto che applica l'architettura Transformer a questo tipo di dati, ottenendo performance competitive in pochi secondi e senza necessità di iperparametrizzazione. Questo strumento risolve il problema della lunga e complessa fase di tuning richiesta dai modelli tradizionali. È rivolto a data scientist e analisti che cercano un metodo rapido e potente per il machine learning su dati strutturati, rappresentando una potenziale svolta nel settore.",
       "stelle_oggi": "230 stars today",
       "url": "https://github.com/PriorLabs/TabPFN",
       "fonte": "GitHub Trending"
     },
     {
-      "titolo": "Open-LLM-VTuber / Open-LLM-VTuber",
-      "riassunto": "Talk to any LLM with hands-free voice interaction, voice interruption, and Live2D taking face running locally across platforms",
-      "stelle_oggi": "25 stars today",
-      "url": "https://github.com/Open-LLM-VTuber/Open-LLM-VTuber",
+      "titolo": "LearningCircuit / local-deep-research",
+      "riassunto": "Questo progetto risponde alla crescente domanda di soluzioni AI che garantiscano privacy e controllo totale sui dati. \"local-deep-research\" permette di creare un potente motore di ricerca e Q&A che opera interamente in locale, senza inviare dati al cloud. Supporta una vasta gamma di LLM locali (via llama.cpp, Ollama) e può indicizzare documenti privati, paper scientifici da arXiv e risultati da oltre 10 motori di ricerca. Ciò che lo distingue è il suo focus sull'esecuzione \"all-local\" e sulla crittografia, rendendolo ideale per ricercatori e aziende che trattano informazioni sensibili.",
+      "stelle_oggi": "559 stars today",
+      "url": "https://github.com/LearningCircuit/local-deep-research",
       "fonte": "GitHub Trending"
     },
     {
-      "titolo": "openai / plugins",
-      "riassunto": "OpenAI Plugins",
-      "stelle_oggi": "17 stars today",
-      "url": "https://github.com/openai/plugins",
+      "titolo": "cheahjs / free-llm-api-resources",
+      "riassunto": "Questo repository sta diventando rapidamente una risorsa di riferimento per la community AI, raccogliendo un elenco curato di endpoint LLM accessibili gratuitamente tramite API. A differenza di singole offerte promozionali, questa lista aggrega decine di provider, consentendo a sviluppatori e ricercatori di prototipare e testare applicazioni senza sostenere i costi delle API commerciali. La sua utilità pratica è immensa per l'ecosistema open-source e per chiunque stia sperimentando con l'IA generativa con un budget limitato. La sua rapida crescita di popolarità ne testimonia il valore immediato per la community.",
+      "stelle_oggi": "564 stars today",
+      "url": "https://github.com/cheahjs/free-llm-api-resources",
       "fonte": "GitHub Trending"
     }
   ],
-  "aggiornamenti_framework": [],
-  "paper_rilevanti": []
+  "aggiornamenti_framework": [
+    {
+      "titolo": "Unsloth - Collaborazione con NVIDIA per Training Accelerato",
+      "riassunto": "Unsloth, la libreria nota per accelerare il fine-tuning di LLM, ha annunciato una collaborazione con NVIDIA per ottimizzare ulteriormente le performance. Grazie all'integrazione con le ultime librerie NVIDIA e ottimizzazioni a basso livello, Unsloth ora promette un training fino a 2.5 volte più veloce e un utilizzo della memoria ridotto del 70% rispetto alle implementazioni standard di Hugging Face. Questo aggiornamento impatta direttamente gli sviluppatori che effettuano fine-tuning, riducendo drasticamente i costi computazionali e i tempi di sviluppo. La partnership solidifica il ruolo di Unsloth come strumento essenziale per rendere il training di LLM più accessibile.",
+      "url": "https://unsloth.ai/blog/nvidia-collab",
+      "fonte": "Hacker News"
+    },
+    {
+      "titolo": "Llama.cpp - Integrazione di Multi-Token Prediction (MTP)",
+      "riassunto": "Llama.cpp, il framework di riferimento per l'inferenza di LLM su CPU e hardware consumer, ha integrato una tecnica di predizione multi-token che ne aumenta significativamente la velocità. Questa funzionalità consente al modello di generare più token in un singolo passaggio, invece di uno alla volta, portando a speedup notevoli, come un +40% riportato per modelli come Gemma 4. Questo aggiornamento è cruciale per la community di \"local LLM\", poiché migliora drasticamente la reattività e l'usabilità dei modelli eseguiti su macchine personali. L'impatto è un'esperienza utente molto più fluida e interattiva, avvicinando le performance locali a quelle dei servizi cloud.",
+      "url": "https://www.reddit.com/r/LocalLLaMA/comments/1t6se6r/multitoken_prediction_mtp_for_llamacpp_gemma_4/",
+      "fonte": "Reddit r/LocalLLaMA"
+    }
+  ],
+  "paper_rilevanti": [
+    {
+      "titolo": "Coerenza Ottimizzatore-Modello: Il Finetuning con lo stesso ottimizzatore del pre-training riduce l'oblio",
+      "riassunto": "Questo paper presenta una scoperta tanto semplice quanto potente: effettuare il fine-tuning completo di un LLM utilizzando lo stesso ottimizzatore (es. AdamW) del suo pre-training riduce significativamente l'oblio catastrofico. I ricercatori dimostrano empiricamente che mantenere la coerenza dell'ottimizzatore porta a performance migliori e a una minore perdita delle conoscenze acquisite durante il pre-training. Hanno validato l'approccio su diversi modelli e task, osservando un miglioramento consistente rispetto all'uso di ottimizzatori diversi. Questa scoperta fornisce una linea guida pratica e a costo zero per chiunque si occupi di fine-tuning, con un impatto diretto sulla qualità dei modelli specializzati.",
+      "url": "http://arxiv.org/abs/2605.06654v1",
+      "fonte": "arXiv"
+    },
+    {
+      "titolo": "Ottimizzazione Ricorsiva di Agenti (RAO)",
+      "riassunto": "Il paper introduce Recursive Agent Optimization (RAO), un nuovo approccio di Reinforcement Learning per addestrare agenti ricorsivi, ovvero agenti capaci di creare e delegare sotto-task a nuove istanze di se stessi. Questo metodo supera i limiti degli agenti monolitici, permettendo di scomporre problemi complessi in sotto-problemi più gestibili in modo gerarchico. Durante l'addestramento, l'agente impara quando è ottimale delegare un compito a un \"sub-agente\", creando una catena di comando dinamica. I risultati mostrano che questo approccio migliora significativamente le performance su task di ragionamento a lungo orizzonte, proponendo un'architettura più scalabile per problemi complessi.",
+      "url": "http://arxiv.org/abs/2605.06639v1",
+      "fonte": "arXiv"
+    },
+    {
+      "titolo": "UniPool: Un Pool di Esperti Condiviso Globalmente per Architetture Mixture-of-Experts",
+      "riassunto": "Questo lavoro sfida l'architettura standard dei Mixture-of-Experts (MoE), in cui ogni layer di un Transformer ha il proprio set di \"esperti\". Gli autori propongono UniPool, un pool di esperti globale e condiviso tra tutti i layer del modello. Questo disaccoppiamento permette una scalabilità più efficiente dei parametri e una migliore allocazione delle risorse, in quanto i layer possono attingere dinamicamente agli esperti più rilevanti dall'intero pool. I test dimostrano che UniPool può raggiungere performance paragonabili a MoE tradizionali utilizzando meno parametri e offrendo una maggiore flessibilità. Questa idea potrebbe ridefinire la progettazione delle prossime generazioni di LLM su larga scala.",
+      "url": "http://arxiv.org/abs/2605.06665v1",
+      "fonte": "arXiv"
+    },
+    {
+      "titolo": "AI Co-Mathematician: Accelerare i Matematici con l'IA Agentica",
+      "riassunto": "Questo paper presenta un sistema agentico, \"AI Co-Mathematician\", progettato per assistere i matematici nella ricerca open-ended. Il sistema combina agenti specializzati per la generazione di congetture, la ricerca simbolica e la verifica di esempi, orchestrati da un agente \"proposer\" che guida il processo. Testato su problemi aperti della teoria dei grafi e della teoria dei nodi, l'AI Co-Mathematician è riuscito a generare nuove intuizioni e a scoprire nuovi teoremi in collaborazione con un matematico umano. Questo lavoro rappresenta un passo avanti significativo nella collaborazione uomo-IA in domini scientifici complessi, mostrando un'applicazione pratica e di alto livello di sistemi agentici.",
+      "url": "http://arxiv.org/abs/2605.06651v1",
+      "fonte": "arXiv"
+    },
+    {
+      "titolo": "Agente di Retrieval Superintelligente: La Prossima Frontiera del Recupero dell'Informazione",
+      "riassunto": "Il paper propone un'evoluzione del paradigma Retrieval-Augmented Generation (RAG) introducendo il \"Superintelligent Retrieval Agent\". A differenza dei sistemi RAG tradizionali che trattano il retrieval come una \"black box\", questo agente ragiona attivamente sul processo di recupero stesso: formula query esplorative, ispeziona i risultati e li riformula iterativamente fino a trovare l'evidenza necessaria. L'agente è addestrato tramite un processo di self-improvement per ottimizzare la sua strategia di ricerca. Questo approccio meta-cognitivo al retrieval mira a superare i limiti dei retriever basati su embedding, promettendo un recupero dell'informazione molto più robusto e contestualmente consapevole.",
+      "url": "http://arxiv.org/abs/2605.06647v1",
+      "fonte": "arXiv"
+    }
+  ]
 }
