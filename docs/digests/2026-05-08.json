@@ -1,0 +1,86 @@
+{
+  "nuovi_strumenti": [
+    {
+      "titolo": "A polynomial autoencoder beats PCA on transformer embeddings",
+      "riassunto": "https://ivanpleshkov.dev/blog/polynomial-autoencoder/",
+      "url": "https://ivanpleshkov.dev/blog/polynomial-autoencoder/",
+      "fonte": "Hacker News"
+    },
+    {
+      "titolo": "AI slop is killing online communities",
+      "riassunto": "https://rmoff.net/2026/05/06/ai-slop-is-killing-online-communities/",
+      "url": "https://rmoff.net/2026/05/06/ai-slop-is-killing-online-communities/",
+      "fonte": "Hacker News"
+    },
+    {
+      "titolo": "Two Home Affairs officials suspended after AI 'hallucinations' found",
+      "riassunto": "https://www.citizen.co.za/news/home-affairs-officials-suspended-ai-hallucinations/",
+      "url": "https://www.citizen.co.za/news/home-affairs-officials-suspended-ai-hallucinations/",
+      "fonte": "Hacker News"
+    },
+    {
+      "titolo": "GPT-5.5 Price Increase: What It Costs",
+      "riassunto": "https://openrouter.ai/announcements/gpt55-cost-analysis",
+      "url": "https://openrouter.ai/announcements/gpt55-cost-analysis",
+      "fonte": "Hacker News"
+    },
+    {
+      "titolo": "Making LLM Training Faster with Unsloth and NVIDIA",
+      "riassunto": "https://unsloth.ai/blog/nvidia-collab",
+      "url": "https://unsloth.ai/blog/nvidia-collab",
+      "fonte": "Hacker News"
+    },
+    {
+      "titolo": "Show HN: AnamDB – An AI-native, differentiable Datalog engine written in Rust",
+      "riassunto": "https://github.com/jam5991/anam",
+      "url": "https://github.com/jam5991/anam",
+      "fonte": "Hacker News"
+    }
+  ],
+  "repo_trending": [
+    {
+      "titolo": "anthropics / financial-services",
+      "riassunto": "",
+      "stelle_oggi": "1,343 stars today",
+      "url": "https://github.com/anthropics/financial-services",
+      "fonte": "GitHub Trending"
+    },
+    {
+      "titolo": "LearningCircuit / local-deep-research",
+      "riassunto": "~95% on SimpleQA (e.g. Qwen3.6-27B on a 3090). Supports all local and cloud LLMs (llama.cpp, Ollama, Google, ...). 10+ search engines - arXiv, PubMed, your private documents. Everything Local & Encrypted.",
+      "stelle_oggi": "559 stars today",
+      "url": "https://github.com/LearningCircuit/local-deep-research",
+      "fonte": "GitHub Trending"
+    },
+    {
+      "titolo": "VectifyAI / PageIndex",
+      "riassunto": "📑 PageIndex: Document Index for Vectorless, Reasoning-based RAG",
+      "stelle_oggi": "943 stars today",
+      "url": "https://github.com/VectifyAI/PageIndex",
+      "fonte": "GitHub Trending"
+    },
+    {
+      "titolo": "PriorLabs / TabPFN",
+      "riassunto": "⚡ TabPFN: Foundation Model for Tabular Data ⚡",
+      "stelle_oggi": "230 stars today",
+      "url": "https://github.com/PriorLabs/TabPFN",
+      "fonte": "GitHub Trending"
+    },
+    {
+      "titolo": "Open-LLM-VTuber / Open-LLM-VTuber",
+      "riassunto": "Talk to any LLM with hands-free voice interaction, voice interruption, and Live2D taking face running locally across platforms",
+      "stelle_oggi": "25 stars today",
+      "url": "https://github.com/Open-LLM-VTuber/Open-LLM-VTuber",
+      "fonte": "GitHub Trending"
+    },
+    {
+      "titolo": "openai / plugins",
+      "riassunto": "OpenAI Plugins",
+      "stelle_oggi": "17 stars today",
+      "url": "https://github.com/openai/plugins",
+      "fonte": "GitHub Trending"
+    }
+  ],
+  "aggiornamenti_framework": [],
+  "paper_rilevanti": []
+}
