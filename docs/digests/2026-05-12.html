@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digest AI – 2026-05-12</title>
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .digest-header { background: #141e37; color: #fff; padding: 2rem 1.5rem 1.5rem; text-align: center; }
+    .digest-header h1 { margin: 0 0 0.3rem; font-size: 1.6rem; }
+    .digest-header .date { color: #b4c8f0; font-size: 0.95rem; }
+    .digest-header .sub { color: #8ca5d2; font-size: 0.82rem; margin-top: 0.25rem; }
+    .section { padding: 1.2rem 1rem 0.5rem; }
+    .section-title { font-size: 1rem; font-weight: 700; padding: 0.5rem 0.75rem; border-radius: 4px; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.4rem; }
+    .section-title.green  { color: #22824f; background: #f0faf4; border-left: 3px solid #22824f; }
+    .section-title.blue   { color: #286eb9; background: #f0f6ff; border-left: 3px solid #286eb9; }
+    .section-title.orange { color: #af551e; background: #fdf5ef; border-left: 3px solid #af551e; }
+    .section-title.purple { color: #6b2d9e; background: #f7f0ff; border-left: 3px solid #6b2d9e; }
+    .item { padding: 0.75rem 0; border-bottom: 1px solid #e8eaf0; }
+    .item:last-child { border-bottom: none; }
+    .item-title { font-weight: 700; font-size: 0.92rem; color: #191e37; margin-bottom: 0.35rem; }
+    .item-summary { font-size: 0.85rem; color: #373c55; line-height: 1.5; margin-bottom: 0.3rem; }
+    .item-meta { font-size: 0.75rem; color: #8282a0; }
+    .item-meta a { color: #326ebe; text-decoration: none; }
+    .item-meta a:hover { text-decoration: underline; }
+    .stars { color: #c88200; font-weight: 600; }
+    .back-link { display: block; text-align: center; padding: 1.5rem; font-size: 0.85rem; color: #326ebe; }
+    .pdf-link { display: inline-block; margin-top: 0.75rem; padding: 0.4rem 0.9rem; background: #141e37; color: #fff; border-radius: 4px; font-size: 0.8rem; text-decoration: none; }
+    .weekly-badge { display: inline-block; background: #f5c542; color: #333; font-size: 0.75rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 10px; margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body>
+  <div class="digest-header">
+    
+    <h1>Digest Quotidiano AI</h1>
+    <div class="date">12 May 2026</div>
+    <div class="sub">Le ultime novità nel mondo dell'intelligenza artificiale</div>
+    
+    <a class="pdf-link" href="https://masmerenda-lab.github.io/ai-digest/digests/AI_Digest_2026-05-12.pdf">⬇ Scarica PDF</a>
+    
+  </div>
+
+  
+
+  
+  
+  <div class="section">
+    <div class="section-title green">🛠 Nuovi Strumenti e Servizi AI</div>
+    
+    <div class="item">
+      <div class="item-title">1. UI-TARS-desktop: Stack per Agenti AI Multimodali da ByteDance</div>
+      <div class="item-summary">ByteDance ha rilasciato UI-TARS, uno stack open-source completo per la creazione di agenti AI multimodali. A differenza di librerie più specifiche, UI-TARS si propone come una soluzione end-to-end che integra modelli di visione, linguaggio e infrastrutture per agenti. La sua architettura è progettata per connettere modelli AI all'avanguardia, permettendo agli sviluppatori di costruire agenti sofisticati capaci di comprendere e interagire con interfacce utente complesse. Questo strumento è particolarmente rilevante per chi vuole creare assistenti desktop avanzati, sistemi di automazione di task GUI o tool di testing software automatizzati, colmando il divario tra i modelli di base e la loro applicazione pratica in ambienti desktop.</div>
+      <div class="item-meta">
+        
+        <a href="https://github.com/bytedance/UI-TARS-desktop" target="_blank" rel="noopener">https://github.com/bytedance/UI-TARS-desktop</a>
+         &nbsp;·&nbsp; GitHub Trending
+      </div>
+    </div>
+    
+    <div class="item">
+      <div class="item-title">2. omlx: Server di inferenza LLM per Apple Silicon</div>
+      <div class="item-summary">omlx emerge come una soluzione performante per eseguire LLM localmente su hardware Apple Silicon. Questo strumento agisce come un server di inferenza gestibile direttamente dalla menu bar di macOS, ottimizzato per sfruttare al massimo l'architettura dei chip M. Si distingue per funzionalità avanzate come il continuous batching, che massimizza il throughput elaborando più richieste in parallelo, e il caching su SSD per accelerare il caricamento dei modelli. omlx risolve il problema delle prestazioni e della user experience per gli sviluppatori e i professionisti che desiderano privacy e velocità senza dipendere da API cloud, rendendo l'inferenza locale su Mac finalmente pratica ed efficiente.</div>
+      <div class="item-meta">
+        
+        <a href="https://github.com/jundot/omlx" target="_blank" rel="noopener">https://github.com/jundot/omlx</a>
+         &nbsp;·&nbsp; GitHub Trending
+      </div>
+    </div>
+    
+    <div class="item">
+      <div class="item-title">3. 9router: Accesso unificato e gratuito a modelli di coding AI</div>
+      <div class="item-summary">9router è un tool che sta guadagnando enorme trazione perché risolve un problema molto concreto per gli sviluppatori: il costo e i limiti di utilizzo degli assistenti di codifica AI. Agisce come un router intelligente che connette i client più popolari (come Copilot, Cursor, Claude Code) a oltre 40 provider di LLM gratuiti (come le API free-tier di Claude, GPT e Gemini). La sua caratteristica distintiva è la gestione automatica del fallback tra i provider per garantire continuità di servizio e una tecnica di ottimizzazione dei token (RTK) che promette una riduzione del 40%. In pratica, permette di sfruttare la potenza dei migliori modelli di coding senza mai incorrere in costi o rate limit, un vero game-changer per l'uso intensivo di questi strumenti.</div>
+      <div class="item-meta">
+        
+        <a href="https://github.com/decolua/9router" target="_blank" rel="noopener">https://github.com/decolua/9router</a>
+         &nbsp;·&nbsp; GitHub Trending
+      </div>
+    </div>
+    
+    <div class="item">
+      <div class="item-title">4. OpenHuman: Un'intelligenza artificiale personale focalizzata sulla privacy</div>
+      <div class="item-summary">OpenHuman si posiziona come un'alternativa agli assistenti AI basati su cloud, ponendo un'enfasi radicale su privacy e controllo utente. Il progetto mira a creare una "super intelligenza" personale che opera localmente, garantendo che i dati sensibili non lascino mai il dispositivo dell'utente. A differenza dei sistemi commerciali che monetizzano i dati, OpenHuman è progettato per essere semplice, potente e privato. La sua rilevanza oggi risiede nella crescente preoccupazione per la privacy dei dati nell'era dell'AI. Si rivolge a utenti e sviluppatori che cercano di costruire applicazioni AI personalizzate senza compromettere la riservatezza, offrendo un'architettura pensata per la sovranità dei dati personali.</div>
+      <div class="item-meta">
+        
+        <a href="https://github.com/tinyhumansai/openhuman" target="_blank" rel="noopener">https://github.com/tinyhumansai/openhuman</a>
+         &nbsp;·&nbsp; GitHub Trending
+      </div>
+    </div>
+    
+    <div class="item">
+      <div class="item-title">5. E2a: Gateway open-source per integrare agenti AI via email</div>
+      <div class="item-summary">E2a è un componente infrastrutturale che risolve un problema di integrazione fondamentale: come far comunicare gli agenti AI attraverso un protocollo universale e asincrono come l'email. Questo gateway open-source permette di triggerare, controllare e ricevere output da agenti AI semplicemente inviando e ricevendo email. Questa soluzione apre scenari di automazione potenti e accessibili, dove processi complessi possono essere gestiti senza la necessità di creare API o interfacce custom. Ad esempio, un agente potrebbe analizzare allegati, generare report e inviarli a un team, tutto orchestrato via email. E2a è rilevante per chiunque voglia integrare capacità autonome in workflow aziendali esistenti in modo robusto e scalabile.</div>
+      <div class="item-meta">
+        
+        <a href="https://github.com/Mnexa-AI/e2a" target="_blank" rel="noopener">https://github.com/Mnexa-AI/e2a</a>
+         &nbsp;·&nbsp; Hacker News
+      </div>
+    </div>
+    
+  </div>
+  
+  
+  
+  
+  <div class="section">
+    <div class="section-title blue">📦 Repository GitHub in Tendenza</div>
+    
+    <div class="item">
+      <div class="item-title">1. anthropics/financial-services</div>
+      <div class="item-summary">Questo repository, direttamente da Anthropic, ha registrato un'impennata di interesse con quasi 1700 stelle in un giorno, segnalando una forte domanda di applicazioni AI nel settore finanziario. Non è un semplice tool, ma una raccolta di ricette, esempi di codice e best practice per utilizzare Claude 3 in scenari finanziari specifici come l'analisi di report, la valutazione del rischio e l'automazione della compliance. La sua rilevanza è enorme perché fornisce un punto di partenza concreto e validato per le aziende del settore che vogliono passare dalla sperimentazione all'implementazione di soluzioni LLM. A differenza di esempi generici, questo repo affronta problemi reali del mondo finanziario con soluzioni pratiche e pronte all'uso.</div>
+      <div class="item-meta">
+        <span class="stars">★ 1,695 stars today</span> &nbsp;
+        <a href="https://github.com/anthropics/financial-services" target="_blank" rel="noopener">https://github.com/anthropics/financial-services</a>
+         &nbsp;·&nbsp; GitHub Trending
+      </div>
+    </div>
+    
+    <div class="item">
+      <div class="item-title">2. HKUDS/AI-Trader</div>
+      <div class="item-summary">AI-Trader sta catturando l'attenzione della community per la sua promessa ambiziosa: un agente di trading 100% autonomo basato su AI. Il progetto si propone di creare un sistema end-to-end che non si limita a generare segnali, ma gestisce l'intero ciclo di trading in modo nativo tramite un'architettura ad agenti. L'interesse attuale è spinto dalla convergenza di due trend potentissimi: gli agenti autonomi e l'applicazione dell'AI al trading algoritmico. Questo repository è significativo per ricercatori e quant trader che vogliono esplorare architetture di agenti finanziari in grado di prendere decisioni complesse in autonomia, andando oltre i modelli di machine learning tradizionali.</div>
+      <div class="item-meta">
+        <span class="stars">★ 801 stars today</span> &nbsp;
+        <a href="https://github.com/HKUDS/AI-Trader" target="_blank" rel="noopener">https://github.com/HKUDS/AI-Trader</a>
+         &nbsp;·&nbsp; GitHub Trending
+      </div>
+    </div>
+    
+    <div class="item">
+      <div class="item-title">3. rohitg00/agentmemory</div>
+      <div class="item-summary">La memoria a lungo termine è uno dei talloni d'Achille degli agenti AI attuali. Il repository agentmemory affronta direttamente questo problema, proponendosi come la soluzione di memoria persistente numero uno per agenti di codifica, basandosi su benchmark del mondo reale. Fornisce un meccanismo per gli agenti per ricordare informazioni, contesti e risultati di task precedenti attraverso sessioni multiple, abilitando così la risoluzione di problemi di programmazione molto più complessi. La sua popolarità è dovuta al fatto che una memoria efficace è il tassello mancante per trasformare gli assistenti di codice da semplici completatori a veri e propri collaboratori autonomi su progetti software di larga scala.</div>
+      <div class="item-meta">
+        <span class="stars">★ 430 stars today</span> &nbsp;
+        <a href="https://github.com/rohitg00/agentmemory" target="_blank" rel="noopener">https://github.com/rohitg00/agentmemory</a>
+         &nbsp;·&nbsp; GitHub Trending
+      </div>
+    </div>
+    
+    <div class="item">
+      <div class="item-title">4. rasbt/LLMs-from-scratch</div>
+      <div class="item-summary">Realizzato dal noto ricercatore ed educatore Sebastian Raschka, questo repository è una risorsa educativa di altissimo valore per chiunque voglia superare l'uso superficiale delle API e comprendere veramente come funzionano gli LLM. Il progetto guida passo dopo passo nell'implementazione di un modello simile a ChatGPT da zero, utilizzando solo PyTorch. La sua popolarità odierna riflette la crescente necessità nella community di sviluppatori di acquisire competenze fondamentali sull'architettura e il training dei trasformatori. A differenza di altri tutorial, questo si distingue per il rigore accademico unito a una spiegazione chiara, rendendo accessibili concetti complessi.</div>
+      <div class="item-meta">
+        <span class="stars">★ 337 stars today</span> &nbsp;
+        <a href="https://github.com/rasbt/LLMs-from-scratch" target="_blank" rel="noopener">https://github.com/rasbt/LLMs-from-scratch</a>
+         &nbsp;·&nbsp; GitHub Trending
+      </div>
+    </div>
+    
+    <div class="item">
+      <div class="item-title">5. wanshuiyin/Auto-claude-code-research-in-sleep</div>
+      <div class="item-summary">ARIS (Auto-Research-In-Sleep) propone un approccio innovativo e minimalista alla creazione di agenti autonomi per la ricerca nel campo del machine learning. Invece di basarsi su framework complessi, definisce le "skill" dell'agente attraverso semplici file Markdown, rendendo il sistema estremamente leggero e agnostico rispetto al modello utilizzato (Claude, Codex, ecc.). L'idea è quella di creare cicli di revisione cross-modello e automazione di esperimenti con una barriera all'ingresso molto bassa. Questo progetto è rilevante perché sfida la complessità crescente dei framework per agenti, dimostrando che è possibile orchestrare task di ricerca complessi con un approccio basato su testo, facilmente estensibile e senza lock-in tecnologico.</div>
+      <div class="item-meta">
+        <span class="stars">★ 186 stars today</span> &nbsp;
+        <a href="https://github.com/wanshuiyin/Auto-claude-code-research-in-sleep" target="_blank" rel="noopener">https://github.com/wanshuiyin/Auto-claude-code-research-in-sleep</a>
+         &nbsp;·&nbsp; GitHub Trending
+      </div>
+    </div>
+    
+  </div>
+  
+  
+  
+  
+  <div class="section">
+    <div class="section-title orange">🔄 Aggiornamenti Framework e Librerie</div>
+    
+    <div class="item">
+      <div class="item-title">1. Gemini API - File Search ora supporta la multimodalità</div>
+      <div class="item-summary">Google ha rilasciato un aggiornamento cruciale per l'API Gemini, estendendo la sua funzionalità di File Search alla multimodalità. Questo permette agli sviluppatori di eseguire ricerche semantiche e implementare architetture RAG (Retrieval-Augmented Generation) su un corpus di documenti che include non solo testo ma anche immagini, video e audio. L'aggiornamento semplifica enormemente la creazione di applicazioni in grado di rispondere a domande complesse basandosi su fonti di dati eterogenee. Questa mossa posiziona Gemini come un diretto e potente concorrente delle capacità multimodali di OpenAI, offrendo un'unica API per gestire l'intero ciclo di indicizzazione e recupero di informazioni da file multimediali.</div>
+      <div class="item-meta">
+        
+        <a href="https://blog.google/innovation-and-ai/technology/developers-tools/expanded-gemini-api-file-search-multimodal-rag/" target="_blank" rel="noopener">https://blog.google/innovation-and-ai/technology/developers-tools/expanded-gemin…</a>
+         &nbsp;·&nbsp; Hacker News
+      </div>
+    </div>
+    
+    <div class="item">
+      <div class="item-title">2. Hugging Face lancia `skills` per potenziare gli Agenti AI</div>
+      <div class="item-summary">Hugging Face ha introdotto `skills`, una nuova libreria progettata per dotare gli agenti AI di capacità concrete attingendo al vasto ecosistema della piattaforma. Invece di dover implementare manualmente l'integrazione con tool esterni, `skills` fornisce un modo standardizzato per un agente di scoprire e utilizzare strumenti disponibili su Hugging Face, come modelli specifici, Spaces interattivi o tool di elaborazione dati. Questa iniziativa è fondamentale perché affronta il problema del "tool use", uno degli ostacoli principali alla creazione di agenti veramente capaci e versatili. Fornendo un ponte standardizzato verso migliaia di strumenti pronti all'uso, `skills` accelera drasticamente lo sviluppo di agenti autonomi potenti.</div>
+      <div class="item-meta">
+        
+        <a href="https://github.com/huggingface/skills" target="_blank" rel="noopener">https://github.com/huggingface/skills</a>
+         &nbsp;·&nbsp; GitHub Trending
+      </div>
+    </div>
+    
+  </div>
+  
+  
+  
+  
+  
+
+  <a class="back-link" href="../index.html">← Tutti i digest</a>
+</body>
+</html>
