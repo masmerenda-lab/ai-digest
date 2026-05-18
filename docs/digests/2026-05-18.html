@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digest AI – 2026-05-18</title>
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .digest-header { background: #141e37; color: #fff; padding: 2rem 1.5rem 1.5rem; text-align: center; }
+    .digest-header h1 { margin: 0 0 0.3rem; font-size: 1.6rem; }
+    .digest-header .date { color: #b4c8f0; font-size: 0.95rem; }
+    .digest-header .sub { color: #8ca5d2; font-size: 0.82rem; margin-top: 0.25rem; }
+    .section { padding: 1.2rem 1rem 0.5rem; }
+    .section-title { font-size: 1rem; font-weight: 700; padding: 0.5rem 0.75rem; border-radius: 4px; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.4rem; }
+    .section-title.green  { color: #22824f; background: #f0faf4; border-left: 3px solid #22824f; }
+    .section-title.blue   { color: #286eb9; background: #f0f6ff; border-left: 3px solid #286eb9; }
+    .section-title.orange { color: #af551e; background: #fdf5ef; border-left: 3px solid #af551e; }
+    .section-title.purple { color: #6b2d9e; background: #f7f0ff; border-left: 3px solid #6b2d9e; }
+    .item { padding: 0.75rem 0; border-bottom: 1px solid #e8eaf0; }
+    .item:last-child { border-bottom: none; }
+    .item-title { font-weight: 700; font-size: 0.92rem; color: #191e37; margin-bottom: 0.35rem; }
+    .item-summary { font-size: 0.85rem; color: #373c55; line-height: 1.5; margin-bottom: 0.3rem; }
+    .item-meta { font-size: 0.75rem; color: #8282a0; }
+    .item-meta a { color: #326ebe; text-decoration: none; }
+    .item-meta a:hover { text-decoration: underline; }
+    .stars { color: #c88200; font-weight: 600; }
+    .back-link { display: block; text-align: center; padding: 1.5rem; font-size: 0.85rem; color: #326ebe; }
+    .pdf-link { display: inline-block; margin-top: 0.75rem; padding: 0.4rem 0.9rem; background: #141e37; color: #fff; border-radius: 4px; font-size: 0.8rem; text-decoration: none; }
+    .weekly-badge { display: inline-block; background: #f5c542; color: #333; font-size: 0.75rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 10px; margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body>
+  <div class="digest-header">
+    
+    <h1>Digest Quotidiano AI</h1>
+    <div class="date">18 May 2026</div>
+    <div class="sub">Le ultime novità nel mondo dell'intelligenza artificiale</div>
+    
+    <a class="pdf-link" href="https://masmerenda-lab.github.io/ai-digest/digests/AI_Digest_2026-05-18.pdf">⬇ Scarica PDF</a>
+    
+  </div>
+
+  
+
+  
+  
+  <div class="section">
+    <div class="section-title green">🛠 Nuovi Strumenti e Servizi AI</div>
+    
+    <div class="item">
+      <div class="item-title">1. Open-Generative-AI: Studio self-hosted per video e immagini</div>
+      <div class="item-summary">Questo progetto si propone come un'alternativa open-source e self-hosted alle piattaforme di AI generativa come Midjourney, Kling o Sora. Offre un'interfaccia unificata per accedere a oltre 200 modelli di generazione di immagini e video, con il vantaggio cruciale di non avere filtri sui contenuti e di essere rilasciato con licenza MIT. La sua rilevanza oggi risiede nel dare a sviluppatori e aziende il pieno controllo sulla pipeline generativa, eliminando i costi di abbonamento e le restrizioni imposte dai servizi cloud. È ideale per chi necessita di personalizzare i workflow o di integrare funzionalità generative avanzate nelle proprie applicazioni senza dipendere da API esterne.</div>
+      <div class="item-meta">
+        
+        <a href="https://github.com/Anil-matcha/Open-Generative-AI" target="_blank" rel="noopener">https://github.com/Anil-matcha/Open-Generative-AI</a>
+         &nbsp;·&nbsp; GitHub Trending
+      </div>
+    </div>
+    
+    <div class="item">
+      <div class="item-title">2. DreamServer: Piattaforma AI completa per l'esecuzione locale</div>
+      <div class="item-summary">DreamServer è una soluzione integrata che permette di eseguire un intero stack di intelligenza artificiale sul proprio hardware, senza dipendenze dal cloud o abbonamenti. Il pacchetto include inferenza per LLM, un'interfaccia di chat, funzionalità vocali, agenti, workflow, RAG per l'interrogazione di documenti e generazione di immagini. Risponde alla crescente domanda di privacy e sovranità dei dati, permettendo a professionisti e piccole imprese di sfruttare potenti strumenti AI in un ambiente completamente offline. A differenza di soluzioni frammentate, DreamServer offre un'esperienza "out-of-the-box" per creare un cloud AI personale.</div>
+      <div class="item-meta">
+        
+        <a href="https://github.com/Light-Heart-Labs/DreamServer" target="_blank" rel="noopener">https://github.com/Light-Heart-Labs/DreamServer</a>
+         &nbsp;·&nbsp; GitHub Trending
+      </div>
+    </div>
+    
+    <div class="item">
+      <div class="item-title">3. whichllm: Benchmark per trovare il miglior LLM per il tuo hardware</div>
+      <div class="item-summary">Questo strumento a riga di comando risolve un problema molto comune per chi lavora con LLM in locale: identificare il modello che offre le migliori performance sul proprio hardware specifico. Invece di basarsi su metriche teoriche come il numero di parametri, `whichllm` esegue benchmark reali e recenti direttamente sulla macchina dell'utente. In un solo comando, fornisce una classifica oggettiva dei modelli che non solo girano, ma lo fanno in modo efficiente. Questo fa risparmiare ore di trial-and-error ed è uno strumento essenziale per ottimizzare i costi e le prestazioni delle applicazioni AI locali.</div>
+      <div class="item-meta">
+        
+        <a href="https://github.com/Andyyyy64/whichllm" target="_blank" rel="noopener">https://github.com/Andyyyy64/whichllm</a>
+         &nbsp;·&nbsp; GitHub Trending
+      </div>
+    </div>
+    
+    <div class="item">
+      <div class="item-title">4. Shannon: AI Pentester autonomo per applicazioni web</div>
+      <div class="item-summary">Shannon si posiziona come un agente AI white-box specializzato in penetration testing per applicazioni web e API. A differenza degli scanner di vulnerabilità tradizionali che operano a scatola nera, Shannon analizza il codice sorgente per comprendere la logica dell'applicazione e identificare vettori di attacco complessi. Successivamente, esegue exploit reali per confermare in modo inequivocabile le vulnerabilità prima che raggiungano l'ambiente di produzione. Questo approccio proattivo è estremamente rilevante per le pipeline DevOps moderne, consentendo ai team di sicurezza di automatizzare test approfonditi e di risolvere i problemi in una fase molto precoce del ciclo di sviluppo.</div>
+      <div class="item-meta">
+        
+        <a href="https://github.com/KeygraphHQ/shannon" target="_blank" rel="noopener">https://github.com/KeygraphHQ/shannon</a>
+         &nbsp;·&nbsp; GitHub Trending
+      </div>
+    </div>
+    
+    <div class="item">
+      <div class="item-title">5. DeepSeek-V2-Flash e la rinascita dello Steering per LLM</div>
+      <div class="item-summary">Il recente rilascio di DeepSeek-V2-Flash, un modello open-source estremamente efficiente, sta riaccendendo l'interesse verso tecniche di controllo avanzate come gli "steering vectors". Questo metodo consente di guidare il comportamento di un LLM durante l'inferenza per modificarne lo stile, il tono o la personalità, senza la necessità di un costoso fine-tuning. L'articolo di approfondimento dimostra come l'efficienza di modelli come DeepSeek-V2-Flash renda questa tecnica non solo teoricamente interessante ma anche praticamente applicabile. Offre ai developer un controllo più granulare e dinamico sull'output del modello, un passo fondamentale per la creazione di applicazioni AI più affidabili e personalizzate.</div>
+      <div class="item-meta">
+        
+        <a href="https://www.seangoedecke.com/steering-vectors/" target="_blank" rel="noopener">https://www.seangoedecke.com/steering-vectors/</a>
+         &nbsp;·&nbsp; Hacker News
+      </div>
+    </div>
+    
+    <div class="item">
+      <div class="item-title">6. Codex ora integrato nell'app mobile di ChatGPT</div>
+      <div class="item-summary">OpenAI ha annunciato l'integrazione di Codex, il suo modello di punta per la generazione di codice, direttamente nell'applicazione mobile di ChatGPT. Questa mossa strategica trasforma l'app da un assistente conversazionale generico a un potente strumento di sviluppo portatile. Gli sviluppatori possono ora generare snippet di codice, eseguire il debug di funzioni o ottenere spiegazioni su algoritmi complessi direttamente dal proprio smartphone. Questo aggiornamento è particolarmente significativo perché risponde alle esigenze di un workflow di sviluppo sempre più flessibile e mobile, rendendo la programmazione assistita da AI accessibile ovunque e in qualsiasi momento.</div>
+      <div class="item-meta">
+        
+        <a href="https://openai.com/index/work-with-codex-from-anywhere/" target="_blank" rel="noopener">https://openai.com/index/work-with-codex-from-anywhere/</a>
+         &nbsp;·&nbsp; Hacker News
+      </div>
+    </div>
+    
+  </div>
+  
+  
+  
+  
+  <div class="section">
+    <div class="section-title blue">📦 Repository GitHub in Tendenza</div>
+    
+    <div class="item">
+      <div class="item-title">1. tinyhumansai / openhuman</div>
+      <div class="item-summary">Questo repository sta registrando una crescita esplosiva di interesse, cavalcando l'onda della domanda per un'intelligenza artificiale personale, privata e potente. Il progetto mira a creare una "super intelligenza" che l'utente può eseguire in locale, garantendo il pieno controllo sui propri dati e sulle interazioni. A differenza degli assistenti cloud come ChatGPT o Claude, OpenHuman si focalizza su un'architettura self-contained, semplice da avviare e potente nelle sue capacità. La sua popolarità odierna riflette una chiara tendenza del mercato verso soluzioni AI decentralizzate e incentrate sull'utente.</div>
+      <div class="item-meta">
+        <span class="stars">★ 1,690 stars today</span> &nbsp;
+        <a href="https://github.com/tinyhumansai/openhuman" target="_blank" rel="noopener">https://github.com/tinyhumansai/openhuman</a>
+         &nbsp;·&nbsp; GitHub Trending
+      </div>
+    </div>
+    
+    <div class="item">
+      <div class="item-title">2. K-Dense-AI / scientific-agent-skills</div>
+      <div class="item-summary">Questo repository affronta una delle sfide chiave nello sviluppo di agenti AI avanzati: la creazione di capacità (skills) affidabili e specifiche per un dominio. Il progetto offre un set di "Agent Skills" pronte all'uso, progettate per compiti di ricerca, ingegneria, analisi finanziaria e scrittura scientifica. Invece di reinventare la ruota, gli sviluppatori possono integrare queste competenze pre-costruite nei loro agenti, accelerando notevolmente lo sviluppo. L'enorme interesse per questo progetto indica una maturazione dell'ecosistema degli agenti, che si sta spostando da framework generici a componenti specializzati e riutilizzabili.</div>
+      <div class="item-meta">
+        <span class="stars">★ 762 stars today</span> &nbsp;
+        <a href="https://github.com/K-Dense-AI/scientific-agent-skills" target="_blank" rel="noopener">https://github.com/K-Dense-AI/scientific-agent-skills</a>
+         &nbsp;·&nbsp; GitHub Trending
+      </div>
+    </div>
+    
+    <div class="item">
+      <div class="item-title">3. microsoft / ai-agents-for-beginners</div>
+      <div class="item-summary">Microsoft ha rilasciato un corso completo e open-source di 12 lezioni per chi vuole iniziare a costruire agenti AI. La rilevanza di questo repository è enorme, poiché fornisce un percorso di apprendimento strutturato e di alta qualità da uno dei principali player del settore, democratizzando l'accesso a conoscenze d'avanguardia. Il curriculum copre i concetti fondamentali fino alla costruzione di agenti funzionanti, colmando un importante vuoto educativo. Per i professionisti tech, rappresenta una risorsa autorevole e gratuita per un rapido upskilling su uno dei temi più caldi dell'intelligenza artificiale.</div>
+      <div class="item-meta">
+        <span class="stars">★ 485 stars today</span> &nbsp;
+        <a href="https://github.com/microsoft/ai-agents-for-beginners" target="_blank" rel="noopener">https://github.com/microsoft/ai-agents-for-beginners</a>
+         &nbsp;·&nbsp; GitHub Trending
+      </div>
+    </div>
+    
+    <div class="item">
+      <div class="item-title">4. NVlabs / Sana</div>
+      <div class="item-summary">Proveniente direttamente dai laboratori di ricerca di NVIDIA, Sana introduce un'architettura innovativa per la sintesi di immagini ad alta risoluzione, basata su un "Linear Diffusion Transformer". Questo approccio si discosta dalle tradizionali architetture U-Net, puntando a una maggiore efficienza computazionale nel processo di diffusione. L'importanza di questo lavoro risiede nel suo potenziale di ridurre drasticamente le risorse necessarie per generare immagini di alta qualità, rendendo la tecnologia accessibile a un pubblico più ampio. Per chi opera nel campo della computer vision, questo repository rappresenta lo stato dell'arte nella ricerca sulla generazione di immagini.</div>
+      <div class="item-meta">
+        <span class="stars">★ 472 stars today</span> &nbsp;
+        <a href="https://github.com/NVlabs/Sana" target="_blank" rel="noopener">https://github.com/NVlabs/Sana</a>
+         &nbsp;·&nbsp; GitHub Trending
+      </div>
+    </div>
+    
+    <div class="item">
+      <div class="item-title">5. BigBodyCobain / Shadowbroker</div>
+      <div class="item-summary">Shadowbroker è un'ambiziosa piattaforma di Open-Source Intelligence (OSINT) che aggrega in un'unica interfaccia fonti di dati eterogenee e pubblicamente accessibili. Il sistema permette di tracciare jet privati, satelliti spia, eventi sismici e molto altro, unificando informazioni che altrimenti richiederebbero strumenti e competenze specialistiche. La sua vera innovazione sta nel predisporre questi dati per essere analizzati da agenti AI, capaci di scoprire correlazioni e pattern nascosti. Questo progetto democratizza l'accesso a capacità di intelligence avanzate, mettendole a disposizione di ricercatori, giornalisti e sviluppatori.</div>
+      <div class="item-meta">
+        <span class="stars">★ 333 stars today</span> &nbsp;
+        <a href="https://github.com/BigBodyCobain/Shadowbroker" target="_blank" rel="noopener">https://github.com/BigBodyCobain/Shadowbroker</a>
+         &nbsp;·&nbsp; GitHub Trending
+      </div>
+    </div>
+    
+  </div>
+  
+  
+  
+  
+  <div class="section">
+    <div class="section-title orange">🔄 Aggiornamenti Framework e Librerie</div>
+    
+    <div class="item">
+      <div class="item-title">1. llama.cpp - Ottimizzazione per la decodifica di prompt in Multi-GPU</div>
+      <div class="item-summary">Una recente pull request nel celebre framework llama.cpp introduce un'ottimizzazione critica per le configurazioni Multi-Tensor Parallelism (MTP). La modifica evita la copia non necessaria dei logits durante la fase di decodifica del prompt, un'operazione che può rappresentare un collo di bottiglia su sistemi multi-GPU. Questo cambiamento riduce la larghezza di banda di memoria utilizzata e accelera l'elaborazione iniziale del contesto, portando a una latenza inferiore. È un aggiornamento tecnico di grande impatto per chiunque esegua modelli di grandi dimensioni in locale, dimostrando la continua e rapida evoluzione degli strumenti open-source per l'inferenza.</div>
+      <div class="item-meta">
+        
+        <a href="https://github.com/ggml-org/llama.cpp/pull/23198" target="_blank" rel="noopener">https://github.com/ggml-org/llama.cpp/pull/23198</a>
+         &nbsp;·&nbsp; Reddit r/LocalLLaMA
+      </div>
+    </div>
+    
+  </div>
+  
+  
+  
+  
+  <div class="section">
+    <div class="section-title purple">📄 Paper arXiv Rilevanti</div>
+    
+    <div class="item">
+      <div class="item-title">1. δ-mem: Memoria Online Efficiente per Large Language Models</div>
+      <div class="item-summary">Questo paper introduce δ-mem, una nuova tecnica che affronta il limite fondamentale della finestra di contesto finita negli LLM. Il metodo consente al modello di avere una memoria online efficiente, comprimendo le interazioni passate tramite un meccanismo di delta-compression e memorizzandole in uno stato a cui il modello può accedere. A differenza dell'attenzione standard, il cui costo computazionale cresce quadraticamente con la lunghezza della sequenza, δ-mem permette di gestire una cronologia molto più estesa con un overhead minimo. I risultati quantitativi dimostrano che la tecnica mantiene bassa la latenza e migliora significativamente le performance in compiti che richiedono un contesto a lungo termine, un progresso chiave per agenti conversazionali più coerenti e consapevoli.</div>
+      <div class="item-meta">
+        
+        <a href="https://arxiv.org/abs/2605.12357" target="_blank" rel="noopener">https://arxiv.org/abs/2605.12357</a>
+         &nbsp;·&nbsp; Hacker News
+      </div>
+    </div>
+    
+  </div>
+  
+  
+
+  <a class="back-link" href="../index.html">← Tutti i digest</a>
+</body>
+</html>
