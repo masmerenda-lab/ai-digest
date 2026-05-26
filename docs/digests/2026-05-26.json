@@ -1,0 +1,74 @@
+{
+  "nuovi_strumenti": [
+    {
+      "titolo": "Microsoft Agent Governance Toolkit",
+      "riassunto": "Microsoft ha rilasciato un toolkit open-source per la governance di agenti AI autonomi, un'area di crescente preoccupazione per la sicurezza. Il progetto affronta direttamente le vulnerabilità critiche delineate nella top 10 OWASP per gli agenti LLM. Fornisce componenti essenziali come l'enforcement di policy, la gestione di identità zero-trust, sandboxing per l'esecuzione sicura del codice e strumenti di reliability engineering. Questo toolkit è fondamentale per le aziende che intendono passare da prototipi di agenti a sistemi di produzione, offrendo un framework concreto per mitigare i rischi di esfiltrazione dati, esecuzione di codice malevolo e manipolazione. Si distingue per essere una soluzione completa e agnostica, pensata per integrarsi in architetture di agenti esistenti.",
+      "url": "https://github.com/microsoft/agent-governance-toolkit",
+      "fonte": "GitHub Trending"
+    },
+    {
+      "titolo": "Kronos: Foundation Model per i Mercati Finanziari",
+      "riassunto": "Kronos si presenta come un foundation model specializzato nel linguaggio dei mercati finanziari, un settore dove la specificità e la comprensione del contesto sono cruciali. A differenza dei LLM generalisti, Kronos è stato pre-addestrato su un vasto corpus di dati finanziari, permettendogli di comprendere e generare insight su concetti complessi come analisi di bilancio, report di mercato e dinamiche di trading. Il progetto mira a colmare il divario tra le capacità generative dei LLM e le esigenze analitiche del mondo finance. È rivolto a quantitative analyst, portfolio manager e sviluppatori di applicazioni FinTech che necessitano di un'AI con una profonda conoscenza del dominio, riducendo il rischio di allucinazioni e interpretazioni errate comuni nei modelli general-purpose.",
+      "url": "https://github.com/shiyu-coder/Kronos",
+      "fonte": "GitHub Trending"
+    },
+    {
+      "titolo": "models.dev: Database Open-Source di Modelli AI",
+      "riassunto": "Models.dev è un nuovo database open-source che aggrega specifiche, pricing e capacità dei principali modelli di intelligenza artificiale. Questo strumento risolve un problema pratico e crescente per gli sviluppatori: la difficoltà di confrontare in modo oggettivo l'offerta frammentata di modelli da provider come OpenAI, Anthropic, Google e altri. La piattaforma permette di filtrare e comparare i modelli in base a parametri tecnici come la dimensione del contesto, le modalità supportate (testo, immagine, etc.) e i costi per token. La sua natura open-source ne garantisce la trasparenza e la possibilità di contribuzione da parte della community, posizionandolo come una risorsa di riferimento essenziale per prendere decisioni informate durante la progettazione di architetture AI.",
+      "url": "https://github.com/anomalyco/models.dev",
+      "fonte": "Hacker News"
+    }
+  ],
+  "repo_trending": [
+    {
+      "titolo": "Lum1104 / Understand-Anything",
+      "riassunto": "Questo repository sta esplodendo su GitHub (+5.600 stelle) per la sua capacità di trasformare qualsiasi codebase in un knowledge graph interattivo. Lo strumento non si limita a visualizzare le dipendenze, ma crea una mappa esplorabile e interrogabile, facilitando enormemente l'onboarding su progetti complessi e il refactoring. La sua rilevanza oggi è legata all'integrazione nativa con assistenti AI come Claude Code e GitHub Copilot, permettendo di porre domande in linguaggio naturale sul funzionamento del codice. A differenza dei classici tool di analisi statica, Understand-Anything offre un'esperienza dinamica che accelera la comprensione profonda del software, rendendolo uno strumento di code intelligence di nuova generazione.",
+      "stelle_oggi": "5,604 stars today",
+      "url": "https://github.com/Lum1104/Understand-Anything",
+      "fonte": "GitHub Trending"
+    },
+    {
+      "titolo": "rohitg00 / ai-engineering-from-scratch",
+      "riassunto": "Questo repository sta guadagnando un'enorme trazione (+3.100 stelle) perché offre un percorso di apprendimento strutturato e pratico sull'AI Engineering. Invece di concentrarsi solo sulla teoria del machine learning, il progetto copre l'intero ciclo di vita di un prodotto AI: dall'ideazione e costruzione del modello fino al deployment e alla manutenzione in produzione (MLOps). Il suo approccio \"Learn it. Build it. Ship it.\" risponde alla crescente domanda di professionisti capaci non solo di addestrare modelli, ma di integrarli in sistemi software scalabili e robusti. Si distingue da altri corsi per il suo focus sull'ingegneria del software applicata all'AI, un'area spesso trascurata ma fondamentale per il successo dei progetti reali.",
+      "stelle_oggi": "3,154 stars today",
+      "url": "https://github.com/rohitg00/ai-engineering-from-scratch",
+      "fonte": "GitHub Trending"
+    },
+    {
+      "titolo": "multica-ai / andrej-karpathy-skills",
+      "riassunto": "Questo progetto, con una crescita di oltre 2.700 stelle, rappresenta una delle tendenze più interessanti del momento: la formalizzazione delle competenze per i LLM. Invece di un prompt generico, il repository contiene un singolo file CLAUDE.md che distilla le osservazioni di Andrej Karpathy sui tranelli più comuni nella generazione di codice da parte dei LLM. Fornendo questo file come contesto, si istruisce il modello a evitare errori specifici, migliorando drasticamente la qualità e l'affidabilità dell'output. Questo approccio basato su \"skill file\" è molto più potente del semplice prompt engineering e dimostra una nuova metodologia per specializzare e rendere più robusti i modelli di codice come Claude Code, senza necessità di fine-tuning.",
+      "stelle_oggi": "2,749 stars today",
+      "url": "https://github.com/multica-ai/andrej-karpathy-skills",
+      "fonte": "GitHub Trending"
+    },
+    {
+      "titolo": "anthropics / knowledge-work-plugins",
+      "riassunto": "Rilasciato direttamente da Anthropic, questo repository contiene una collezione di plugin open-source per il loro ambiente Claude Cowork, pensati specificamente per i \"knowledge worker\". La sua importanza risiede nel segnale strategico che lancia: Anthropic non sta solo costruendo un modello, ma un ecosistema di produttività. I plugin permettono a Claude di interagire con strumenti esterni, analizzare dati e automatizzare task complessi, trasformandolo da un chatbot a un vero e proprio collaboratore digitale. A differenza di altre soluzioni, questi plugin sono progettati con un focus sulla sicurezza e l'affidabilità per casi d'uso aziendali, dimostrando la volontà di Anthropic di competere direttamente con le offerte enterprise di Microsoft e Google.",
+      "stelle_oggi": "1,441 stars today",
+      "url": "https://github.com/anthropics/knowledge-work-plugins",
+      "fonte": "GitHub Trending"
+    },
+    {
+      "titolo": "mukul975 / Anthropic-Cybersecurity-Skills",
+      "riassunto": "Questo repository fornisce un set strutturato di 754 skill di cybersecurity per agenti AI, un'applicazione di enorme valore pratico. Il progetto mappa queste competenze su framework standard del settore come MITRE ATT&CK, NIST CSF 2.0 e D3FEND, creando un vocabolario comune e verificabile per le capacità di un agente in ambito sicurezza. Ciò consente di istruire un LLM a svolgere compiti specifici di threat hunting, analisi delle vulnerabilità o incident response in modo sistematico e allineato alle best practice. La sua rilevanza è immediata per i team di sicurezza che vogliono sfruttare l'AI per automatizzare e scalare le proprie operazioni, fornendo un framework pronto all'uso e compatibile con oltre 20 piattaforme AI.",
+      "stelle_oggi": "1,004 stars today",
+      "url": "https://github.com/mukul975/Anthropic-Cybersecurity-Skills",
+      "fonte": "GitHub Trending"
+    }
+  ],
+  "aggiornamenti_framework": [],
+  "paper_rilevanti": [
+    {
+      "titolo": "Constraint Decay: la fragilità degli agenti LLM nella generazione di codice back-end",
+      "riassunto": "Questo paper introduce un concetto critico per lo sviluppo di agenti autonomi: il \"Constraint Decay\". Gli autori dimostrano che, durante la generazione di codice per compiti complessi, gli agenti LLM tendono a \"dimenticare\" o violare progressivamente i vincoli iniziali imposti nel prompt man mano che il task procede. Hanno sviluppato un nuovo benchmark per misurare questo fenomeno e hanno scoperto che anche modelli state-of-the-art come GPT-4o e Claude 3 Opus ne soffrono significativamente, con tassi di fallimento elevati. Questa ricerca è fondamentale perché evidenzia una debolezza strutturale degli agenti attuali e suggerisce che l'affidabilità a lungo termine in task complessi richiede architetture più sofisticate della semplice iterazione su un prompt.",
+      "url": "https://arxiv.org/abs/2605.06445",
+      "fonte": "Hacker News"
+    },
+    {
+      "titolo": "CODA: Riscrivere i blocchi Transformer come programmi GEMM-Epilogue",
+      "riassunto": "Questo lavoro di ricerca propone CODA, una tecnica di ottimizzazione a basso livello che accelera significativamente l'inferenza dei modelli Transformer. Il metodo riscrive interi blocchi del Transformer (multi-head attention, FFN) come un'unica sequenza di operazioni fuse, eseguite come parte dell'\"epilogo\" di una chiamata alla libreria GEMM (General Matrix Multiply). In questo modo si riduce drasticamente l'overhead dovuto al lancio di kernel multipli e allo spostamento di dati nella memoria della GPU. I risultati sono notevoli: gli autori riportano un'accelerazione end-to-end di 1.55x per l'inferenza di Llama 2 7B e fino a 3.16x per specifici layer, il tutto senza alterare matematicamente l'output del modello. Questa tecnica è di grande impatto per chi lavora sull'ottimizzazione dell'inferenza e sul deployment efficiente di LLM.",
+      "url": "https://arxiv.org/abs/2605.19269",
+      "fonte": "Hacker News"
+    }
+  ]
+}
